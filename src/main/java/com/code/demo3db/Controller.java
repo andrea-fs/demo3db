@@ -66,13 +66,21 @@ public class Controller implements Initializable {
     }
 
     public void controlloUtente(ActionEvent event) throws SQLException, IOException {
+        error_password.setText("");
+        select_check.setText("");
         if(checkBoxPaziente.isSelected() || checkBoxMedico.isSelected()) {
             model = Model.getInstance();
             boolean response = (model.controlloUtente(userInput.getText(), passwordInput.getText()));
             if (response) {
                 nomeutenteinserito = userInput.getText();
                 passwordInput.clear();
-                switchToSceneMedico(event);
+                //TODO controllare che i medici non vadano dai pazienti e il contrario (password e nome gista ma pin no)
+                if(checkBoxMedico.isSelected()) {
+                    switchToSceneMedico(event);
+                }
+                else {
+                    switchToScenePaziente(event);
+                }
             } else {
                 passwordInput.clear();
                 error_password.setText("password errata");
@@ -90,6 +98,20 @@ public class Controller implements Initializable {
         Parent root = loader.load();
         MedicoInterfaccia medicoInterfaccia = loader.getController();
         medicoInterfaccia.initializeData(userInput.getText());
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToScenePaziente(ActionEvent event) throws IOException {
+
+        //Parent root = FXMLLoader.load(getClass().getResource("MedicoInterfaccia.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PazienteInterfaccia.fxml"));
+        Parent root = loader.load();
+        PazienteInterfaccia pazienteInterfaccia = loader.getController();
+        pazienteInterfaccia.initializeData(userInput.getText());
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

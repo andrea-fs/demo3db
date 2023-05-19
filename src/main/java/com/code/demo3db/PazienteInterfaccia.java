@@ -53,4 +53,5 @@ public class PazienteInterfaccia implements Initializable{
         nomeUtenteLabel.setText(nomeUtente);
 
     }
+
 }
