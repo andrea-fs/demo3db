@@ -15,7 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MedicoInterfaccia implements Initializable {
+public class PazienteInterfaccia implements Initializable{
+
 
     private final String COLORE_STATICO = "-fx-background-color: #b2b2b2";
     private final String COLORE_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #a2a2a2; -fx-font-size: 11px;";
@@ -27,7 +28,6 @@ public class MedicoInterfaccia implements Initializable {
     private Parent root;
     @FXML
     private Label nomeUtenteLabel;
-
     private String nomeUtente;
 
     @FXML
@@ -39,16 +39,13 @@ public class MedicoInterfaccia implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        indietro.setStyle(COLORE_STATICO);
         indietro.setOnMouseEntered(e-> indietro.setStyle(COLORE_DINAMICO));
         indietro.setOnMouseExited(e-> indietro.setStyle(COLORE_STATICO));
         indietro.setOnMouseClicked(e -> indietro.setStyle(COLORE_CLIK_DINAMICO));
         System.out.println(nomeUtenteLabel);
     }
-
     public void initializeData(String nomeUtente) {
 
         // TODO

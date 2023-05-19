@@ -8,12 +8,12 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.MedicoInterfaccia">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.PazienteInterfaccia">
    <children>
-      <Label layoutX="532.0" layoutY="14.0" text="nome medico" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0">
          <fill>
-            <LinearGradient endX="0.1212121139873158" endY="1.0" startX="1.0" startY="1.0">
+            <LinearGradient endX="0.034090893512422386" endY="1.0" startX="1.0" startY="1.0">
                <stops>
                   <Stop>
                      <color>
@@ -22,14 +22,14 @@
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.31017544865608215" green="0.3687134385108948" blue="0.410526305437088" />
+                        <Color red="0.17165692150592804" green="0.38947367668151855" blue="0.2805652916431427" />
                      </color>
                   </Stop>
                </stops>
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Label fx:id="nomeUtenteLabel" layoutX="14.0" layoutY="23.0" text="Nome medico" textFill="#ffedbd" />
-      <Button fx:id="indietro" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#indietro" text="indietro" />
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="indietro" />
+      <Label fx:id="nomeUtenteLabel" layoutX="14.0" layoutY="14.0" text="nome paziente" textFill="#ffedbd" />
    </children>
 </AnchorPane>
