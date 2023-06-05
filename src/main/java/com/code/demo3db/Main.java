@@ -18,19 +18,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static javafx.application.Application.launch;
-
-
 public class Main extends Application{
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Password.fxml"));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 800, 500);
 
 
         Image icon = new Image(getClass().getResourceAsStream("/icona.png"));
         stage.getIcons().add(icon);
         stage.setResizable(false);
+
         stage.setTitle("Autenticazione");
         stage.setScene(scene);
         stage.show();
@@ -39,9 +38,9 @@ public class Main extends Application{
         Model db = new Model();
         Connection conn = db.connessione();
         //db.createTable(conn,"employee");
-        db.insert_raw("archivio","andre","password");
-        db.insert_raw("archivio","gio","ciao");
-        db.insert_raw("archivio","fra","bo");
+        db.insert_raw("archivio","M1","password","Andre","Foss","M");
+        db.insert_raw("archivio","P1","ciao","Fra","Si","P");
+        db.insert_raw("archivio","P2","bo","Gio","Se","P");
         launch();
     }
 }

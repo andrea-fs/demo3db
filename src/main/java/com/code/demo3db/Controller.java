@@ -5,7 +5,9 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.beans.property.SimpleStringProperty;
-
+import javafx.scene.Cursor;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,7 +17,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -36,6 +40,10 @@ public class Controller implements Initializable {
     private final String COLORE_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #a2a2a2; -fx-font-size: 11px;";
     private final String COLORE_CLIK_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #c4c43d; -fx-font-size: 11px;";
     @FXML
+    private Pane mainPane;
+    @FXML
+    private Pane anchorPane;
+    @FXML
     private TextField passwordInput;
     @FXML
     private Label benvenuto;
@@ -43,6 +51,8 @@ public class Controller implements Initializable {
     private Label error_password;
     @FXML
     private Label select_check;
+    @FXML
+    private Rectangle rettangolo;
 
     @FXML
     private TextField userInput;
@@ -68,26 +78,42 @@ public class Controller implements Initializable {
     public void controlloUtente(ActionEvent event) throws SQLException, IOException {
         error_password.setText("");
         select_check.setText("");
-        if(checkBoxPaziente.isSelected() || checkBoxMedico.isSelected()) {
-            model = Model.getInstance();
-            boolean response = (model.controlloUtente(userInput.getText(), passwordInput.getText()));
-            if (response) {
-                nomeutenteinserito = userInput.getText();
-                passwordInput.clear();
-                //TODO controllare che i medici non vadano dai pazienti e il contrario (password e nome gista ma pin no)
-                if(checkBoxMedico.isSelected()) {
-                    switchToSceneMedico(event);
-                }
-                else {
-                    switchToScenePaziente(event);
+        if(userInput.getText().equals("Admin") && passwordInput.getText().equals("passwordAdmin")){
+            switchToSceneAdmin(event);
+        }
+        else {
+            if (checkBoxPaziente.isSelected() || checkBoxMedico.isSelected()) {
+                model = Model.getInstance();
+                boolean response = (model.controlloUtente(userInput.getText(), passwordInput.getText()));
+                if (response) {
+                    nomeutenteinserito = userInput.getText();
+                    passwordInput.clear();
+                    String userType = model.getType(nomeutenteinserito);
+                    if (userType != null) {
+                        if (checkBoxMedico.isSelected() && userType.equals("M")) {
+                            switchToSceneMedico(event);
+                        } else if (checkBoxPaziente.isSelected() && userType.equals("P")) {
+                            switchToScenePaziente(event);
+                        } else {
+                            passwordInput.clear();
+                            rettangolo.setFill(Color.RED);
+                            error_password.setText("password errata");
+                        }
+
+                    } else {
+                        select_check.setText("Tipo di utente non valido");
+                    }
+                } else {
+                    passwordInput.clear();
+                    rettangolo.setFill(Color.RED);
+                    error_password.setText("password errata");
                 }
             } else {
-                passwordInput.clear();
-                error_password.setText("password errata");
+                select_check.setText("Selezionare un portale");
+                checkBoxMedico.setStyle("-fx-text-fill: red;");
+                checkBoxPaziente.setStyle("-fx-text-fill: red;");
+
             }
-        }
-        else{
-            select_check.setText("Selezionare un portale");
         }
     }
 
@@ -103,6 +129,7 @@ public class Controller implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(true);
     }
 
     public void switchToScenePaziente(ActionEvent event) throws IOException {
@@ -117,6 +144,20 @@ public class Controller implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(true);
+
+    }
+    public void switchToSceneAdmin(ActionEvent event) throws IOException {
+
+        //Parent root = FXMLLoader.load(getClass().getResource("MedicoInterfaccia.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
+        Parent root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(true);
     }
 
     public void controlCheck(ActionEvent e){
@@ -130,26 +171,37 @@ public class Controller implements Initializable {
     }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        userInput.setPromptText("Es. Mario Rossi");
+        userInput.setPromptText("Matricola");
         passwordInput.setPromptText("Password");
-        buttonLogin.setStyle(COLORE_STATICO);
+        //buttonLogin.setStyle(COLORE_STATICO);
         error_password.setText("");
         error_password.setStyle(COLORE_ERRORE);
         select_check.setText("");
         select_check.setStyle(COLORE_ERRORE);
+        buttonLogin.setCursor(Cursor.HAND);
+        checkBoxMedico.setCursor(Cursor.HAND);
+        checkBoxPaziente.setCursor(Cursor.HAND);
 
-        buttonLogin.setOnMouseEntered(e-> buttonLogin.setStyle(COLORE_DINAMICO));
-        buttonLogin.setOnMouseExited(e-> buttonLogin.setStyle(COLORE_STATICO));
-        buttonLogin.setOnMouseClicked(e -> buttonLogin.setStyle(COLORE_CLIK_DINAMICO));
 
+        checkBoxPaziente.setOnMouseClicked(e -> {
+            checkBoxPaziente.setStyle("-fx-text-fill: white;");
+            checkBoxMedico.setStyle("-fx-text-fill: white;");
+        });
+
+        checkBoxMedico.setOnMouseClicked(e -> {
+            checkBoxMedico.setStyle("-fx-text-fill: white;");
+            checkBoxPaziente.setStyle("-fx-text-fill: white;");
+        });
+
+        //buttonLogin.setOnMouseEntered(e-> buttonLogin.setStyle(COLORE_DINAMICO));
+        //buttonLogin.setOnMouseExited(e-> buttonLogin.setStyle(COLORE_STATICO));
+        //buttonLogin.setOnMouseClicked(e -> buttonLogin.setStyle(COLORE_CLIK_DINAMICO));
         checkBoxMedico.setOnAction(this::controlCheck);
         checkBoxPaziente.setOnAction(this::controlCheck);
-
-
+//TODO enter
     }
-
-
 }

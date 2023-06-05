@@ -2,10 +2,18 @@ package com.code.demo3db;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.*;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import com.code.demo3db.ArchivioRow;
+
+
 
 public class Model {
     private Connection conn;
     private static Model single_instance = null;
+    private ObservableList<ArchivioRow> archivioRows;
+
+
     public void log(Object o){
         System.out.println(o);
     }
@@ -29,6 +37,9 @@ public class Model {
         }
         return conn;
     }
+    public ObservableList<ArchivioRow> getArchivioRows() {
+        return archivioRows;
+    }
     public static synchronized Model getInstance() throws SQLException
     {
         if (single_instance == null)
@@ -36,6 +47,7 @@ public class Model {
 
         return single_instance;
     }
+    // non utilizzato
     public void createTable(String table_name){
 
         try{
@@ -50,8 +62,11 @@ public class Model {
     public void resetArchivioTable() throws SQLException{
         String s = "DROP TABLE IF EXISTS archivio;" +
                 "CREATE TABLE archivio( " +
-                "name VARCHAR(255) PRIMARY KEY, " +
-                "password VARCHAR(200)" +
+                "matricola VARCHAR(255) PRIMARY KEY, " +
+                "password VARCHAR(200), " +
+                "nome VARCHAR(200), " +
+                "cognome VARCHAR(200), " +
+                "type VARCHAR(200)" +
                 ");";
 
         log(s);
@@ -59,6 +74,8 @@ public class Model {
     }
     Model() throws SQLException {
         connessione();
+        archivioRows = FXCollections.observableArrayList(); // Inizializza la lista archivioRows
+
         if (tableExists("archivio"))
         {
             log("archivio table exists");
@@ -69,13 +86,16 @@ public class Model {
         };
     }
 
-    public void insert_raw(String tablename, String name, String password){
+    public void insert_raw(String tablename, String matricola, String password, String nome, String cognome, String type){
 
         try{
             //String query = "insert into "+tablename+"(name,password) "+"values('"+name+","+password+");";
-            String q = String.format("insert into %s(name,password) values('%s', '%s');",tablename,name,password);
+            String q = String.format("insert into %s(matricola,password,nome,cognome,type) values('%s', '%s', '%s', '%s', '%s');",tablename, matricola, password, nome, cognome,type);
             log(q);
             runStatement(q);
+
+            ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, type);
+            archivioRows.add(row);
         }catch (Exception e){
             System.out.println(e);
         }
@@ -100,17 +120,31 @@ public class Model {
         String q = "SELECT * FROM information_schema.tables WHERE table_name = '"+table_name+"'";
         log(q);
         ResultSet rs = runQuery(q);
+        System.out.println("SEEEEEEEE" +
+                "eeeeee" +
+                "eeee" +
+                "eee");
         return rs.next();
     }
     public void setUser(String user) throws SQLException{
-        String s = "UPDATE archivio SET name = '" + user;
+        String s = "UPDATE archivio SET matricola = '" + user;
         log(s);
         runStatement(s);
+    }// non serve
+    public String getType(String matricola) throws SQLException {
+        String q = "SELECT type FROM archivio WHERE matricola = '" + matricola + "'";
+        log(q);
+        ResultSet rs = runQuery(q);
+        if (rs.next()) {
+            return rs.getString("type");
+        } else {
+            return null;
+        }
     }
 
 
-    public boolean controlloUtente(String name, String password) throws SQLException{
-        String q = "SELECT * FROM archivio WHERE name = '" + name + "' AND password = '" + password + "'";
+    public boolean controlloUtente(String matricola, String password) throws SQLException{
+        String q = "SELECT * FROM archivio WHERE name = '" + matricola + "' AND password = '" + password + "'";
         log(q);
 
         ResultSet rs = runQuery(q);

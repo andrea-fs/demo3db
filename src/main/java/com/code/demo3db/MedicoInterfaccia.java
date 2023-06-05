@@ -54,6 +54,5 @@ public class MedicoInterfaccia implements Initializable {
         // TODO
         this.nomeUtente = nomeUtente;
         nomeUtenteLabel.setText(nomeUtente);
-
     }
 }
