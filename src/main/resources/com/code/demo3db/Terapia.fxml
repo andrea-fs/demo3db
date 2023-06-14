@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="385.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Terapia">
+    <children>
+        <Label layoutX="229.0" layoutY="218.0" text="terapy">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+    </children>
+</Pane>

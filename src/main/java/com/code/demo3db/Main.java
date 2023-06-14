@@ -38,9 +38,9 @@ public class Main extends Application{
         Model db = new Model();
         Connection conn = db.connessione();
         //db.createTable(conn,"employee");
-        db.insert_raw("archivio","M1","password","Andre","Foss","M");
-        db.insert_raw("archivio","P1","ciao","Fra","Si","P");
-        db.insert_raw("archivio","P2","bo","Gio","Se","P");
+        //db.insert_raw("archivio","M1","password","Andre","Foss","M");
+        //db.insert_raw("archivio","P1","ciao","Fra","Si","P");
+        //db.insert_raw("archivio","P2","bo","Gio","Se","P");
         launch();
     }
 }

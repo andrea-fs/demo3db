@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="505.0" prefWidth="588.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Inserimento">
+    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe282" height="69.0" layoutX="149.0" layoutY="123.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="100.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe282" height="69.0" layoutX="28.0" layoutY="123.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="100.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe282" height="69.0" layoutX="28.0" layoutY="369.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="202.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe282" height="58.0" layoutX="28.0" layoutY="289.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="517.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe282" height="58.0" layoutX="29.0" layoutY="212.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="517.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+        <Label layoutX="199.0" layoutY="14.0" text="Inserimento" textFill="#212121">
+            <font>
+                <Font name="Bell MT Bold" size="36.0" />
+            </font>
+        </Label>
+      <Label layoutX="208.0" layoutY="50.0" text="Inserisci qui i tuoi dati giornalieri" />
+      <Label layoutX="284.0" layoutY="167.0" text="Pressione sistolica (SBP) e pressione diastolica (DBP)" />
+      <Label layoutX="37.0" layoutY="215.0" text="Sintomi" />
+      <Label layoutX="37.0" layoutY="292.0" text="Farmaci" />
+      <Label layoutX="37.0" layoutY="378.0" text="Data" />
+      <Spinner fx:id="SBP" layoutX="37.0" layoutY="150.0" prefHeight="25.0" prefWidth="83.0" />
+      <Spinner fx:id="DBP" layoutX="157.0" layoutY="150.0" prefHeight="25.0" prefWidth="83.0" />
+      <Label layoutX="62.0" layoutY="129.0" prefHeight="17.0" prefWidth="32.0" text="SBP" />
+      <Label layoutX="183.0" layoutY="129.0" prefHeight="17.0" prefWidth="32.0" text="DBP" />
+      <TextField layoutX="37.0" layoutY="313.0" prefHeight="25.0" prefWidth="494.0" />
+      <TextField layoutX="37.0" layoutY="236.0" prefHeight="25.0" prefWidth="494.0" />
+      <DatePicker fx:id="data" layoutX="35.0" layoutY="404.0" promptText="Inserisci la data" />
+    </children>
+
+
+</Pane>

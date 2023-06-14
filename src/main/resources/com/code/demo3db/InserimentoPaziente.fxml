@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.InserimentoPaziente">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #333333; -fx-min-width: 600; -fx-min-height: 400;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.InserimentoPaziente">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3e6b54" height="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+      <Rectangle fx:id="rettangolo" arcHeight="5.0" arcWidth="5.0" fill="#3e6b54" height="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" />
       <Label layoutX="372.0" layoutY="6.0" text="Inserimento dati" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Label fx:id="nomeUtenteLabel" layoutX="14.0" layoutY="15.0" text="Nome utente" textFill="WHITE" />
+      <Spinner fx:id="SBP" layoutX="187.0" layoutY="64.0" prefHeight="37.0" prefWidth="78.0" />
+      <Spinner fx:id="DBP" layoutX="187.0" layoutY="110.0" prefHeight="37.0" prefWidth="78.0" />
+      <Label layoutX="152.0" layoutY="162.0" text="Sintomi" textFill="WHITE" />
+      <TextField layoutX="152.0" layoutY="180.0" />
+      <Label layoutX="152.0" layoutY="42.0" text="Pressione sistolica (SBP) e pressione diastolica (DBP)" textFill="WHITE" />
+      <Label layoutX="152.0" layoutY="74.0" text="SBP" textFill="WHITE" />
+      <Label layoutX="151.0" layoutY="120.0" text="DBP" textFill="WHITE" />
+      <Label layoutX="152.0" layoutY="218.0" text="Farmaci" textFill="WHITE" />
+      <TextField layoutX="151.0" layoutY="245.0" />
+      <DatePicker layoutX="148.0" layoutY="337.0" />
+      <Button layoutX="522.0" layoutY="337.0" mnemonicParsing="false" text="Button" />
+      <Label fx:id="nome" layoutX="14.0" layoutY="34.0" text="Nome" />
+      <Label fx:id="cognome" layoutX="14.0" layoutY="51.0" text="Cognome" />
    </children>
 </AnchorPane>

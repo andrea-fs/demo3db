@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Admin">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="682.0" style="-fx-min-width: 682; -fx-min-height: 400;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Admin">
    <children>
       <TableView fx:id="tabella" layoutX="224.0" layoutY="-1.0" prefHeight="400.0" prefWidth="458.0">
         <columns>
@@ -35,6 +35,8 @@
       <Label layoutX="14.0" layoutY="177.0" text="Cognome" />
       <Label layoutX="14.0" layoutY="221.0" text="Paziente (P) o Medico (M)?" />
       <ChoiceBox fx:id="MedicoPaziente" layoutX="14.0" layoutY="239.0" prefWidth="150.0" />
-      <Button fx:id="insert_button" layoutX="14.0" layoutY="308.0" mnemonicParsing="false" onAction="#insert_tupla" text="Inserimento" />
+      <Button fx:id="insert_button" layoutX="12.0" layoutY="287.0" mnemonicParsing="false" onAction="#insert_tupla" text="Inserimento" />
+      <Button fx:id="remove_button" layoutX="12.0" layoutY="318.0" mnemonicParsing="false" onAction="#remove_tupla" text="Rimozione" />
+      <Button fx:id="indietro" layoutX="12.0" layoutY="367.0" mnemonicParsing="false" onAction="#indietro" text="Torna alla schermata di login" textFill="#8c1a1a" />
    </children>
 </AnchorPane>

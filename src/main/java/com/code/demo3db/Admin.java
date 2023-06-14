@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -38,9 +39,15 @@ public class Admin implements Initializable {
 
     @FXML
     private TableView<ArchivioRow> tabella;
-    private  Model model;
+    private Model model;
+    private Stage stage;
+    private Scene scene;
     @FXML
     private Button insert_button;
+    @FXML
+    private Button indietro;
+    @FXML
+    private Button remove_button;
     @FXML
     private TextField matricola;
     @FXML
@@ -52,7 +59,7 @@ public class Admin implements Initializable {
     @FXML
     private ChoiceBox<String> MedicoPaziente;
     private String tablename = "archivio";
-
+    // TODO IMPORTANTE CONTROLLA INSERIMENTO MINIMO PASSEORD ECC. !!!!!!!!!!
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -76,7 +83,7 @@ public class Admin implements Initializable {
         }
     }
 
-    public void insert_tupla(ActionEvent event) throws SQLException{
+    public void insert_tupla(ActionEvent event) throws SQLException {
         String matricolaText = matricola.getText();
         String passwordText = password.getText();
         String nomeText = nome.getText();
@@ -85,7 +92,7 @@ public class Admin implements Initializable {
 
         ArchivioRow row = new ArchivioRow(matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue);
         model.insert_raw(tablename,matricolaText,passwordText,nomeText,cognomeText, medicoPazienteValue);
-        tabella.getItems().add(row);
+        //tabella.getItems().add(row);
 
         matricola.clear();
         password.clear();
@@ -94,4 +101,23 @@ public class Admin implements Initializable {
         MedicoPaziente.setValue("M");
     }
 
+    public void remove_tupla(ActionEvent event) throws SQLException {
+        ArchivioRow selectedRow = tabella.getSelectionModel().getSelectedItem();
+        if (selectedRow != null) {
+            String matricola = selectedRow.getMatricola();
+            // Esegui l'operazione di rimozione utilizzando il modello
+            model.remove_raw("archivio", matricola);
+            // Rimuovi la riga dalla tabella
+            tabella.getItems().remove(selectedRow);
+        }
+    }
+    @FXML
+    public void indietro(ActionEvent eventIndietro) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Password.fxml"));
+
+        stage = (Stage) ((Node) eventIndietro.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

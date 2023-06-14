@@ -78,7 +78,7 @@ public class Controller implements Initializable {
     public void controlloUtente(ActionEvent event) throws SQLException, IOException {
         error_password.setText("");
         select_check.setText("");
-        if(userInput.getText().equals("Admin") && passwordInput.getText().equals("passwordAdmin")){
+        if(userInput.getText().equals("Admin") && passwordInput.getText().equals("passwordAdmin")){ //TODO password sul codice: debole
             switchToSceneAdmin(event);
         }
         else {
@@ -129,7 +129,7 @@ public class Controller implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(true);
+        //stage.setResizable(true);
     }
 
     public void switchToScenePaziente(ActionEvent event) throws IOException {
@@ -144,7 +144,7 @@ public class Controller implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(true);
+        stage.setResizable(false);
 
     }
     public void switchToSceneAdmin(ActionEvent event) throws IOException {

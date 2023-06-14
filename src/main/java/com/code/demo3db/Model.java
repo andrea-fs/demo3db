@@ -4,9 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 import java.sql.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import java.util.ArrayList;
+
 import com.code.demo3db.ArchivioRow;
 
-
+// TODO controlli tuple inserimento ecc
 
 public class Model {
     private Connection conn;
@@ -79,6 +81,7 @@ public class Model {
         if (tableExists("archivio"))
         {
             log("archivio table exists");
+            fetchArchivioData();
         }
         else {
             log("archivio table DO NOT exists");
@@ -96,6 +99,21 @@ public class Model {
 
             ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, type);
             archivioRows.add(row);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void remove_raw(String tablename, String matricola){
+        try{
+            //String query = "insert into "+tablename+"(name,password) "+"values('"+name+","+password+");";
+            String q = String.format("DELETE FROM %s WHERE matricola = '%s';", tablename, matricola);
+            log(q);
+            Statement stmt = conn.createStatement();
+            boolean rimosso = stmt.executeUpdate(q) > 0;
+            if(rimosso) {
+                archivioRows.removeIf(row -> row.getMatricola().equals(matricola));
+            }
         }catch (Exception e){
             System.out.println(e);
         }
@@ -144,7 +162,7 @@ public class Model {
 
 
     public boolean controlloUtente(String matricola, String password) throws SQLException{
-        String q = "SELECT * FROM archivio WHERE name = '" + matricola + "' AND password = '" + password + "'";
+        String q = "SELECT * FROM archivio WHERE matricola = '" + matricola + "' AND password = '" + password + "'";
         log(q);
 
         ResultSet rs = runQuery(q);
@@ -157,6 +175,41 @@ public class Model {
             System.out.println("no");
             return false;
         }
+    }
+
+    public void fetchArchivioData() throws SQLException {
+        String query = "SELECT * FROM archivio";
+        ResultSet rs = runQuery(query);
+
+        // Crea una nuova lista temporanea per i dati di archivio
+        ArrayList<ArchivioRow> tempList = new ArrayList<>();
+
+        while (rs.next()) {
+            String matricola = rs.getString("matricola");
+            String password = rs.getString("password");
+            String nome = rs.getString("nome");
+            String cognome = rs.getString("cognome");
+            String medicoPaziente = rs.getString("type");
+
+            ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, medicoPaziente);
+            tempList.add(row);
+        }
+
+        // Sostituisci la lista archivioRows con i nuovi dati
+        archivioRows = FXCollections.observableArrayList(tempList);
+    }
+
+    public String[] getDatafromMatricola(String nometabella, String matricola) throws SQLException {
+        String q = String.format("SELECT nome, cognome FROM %s WHERE matricola = '%s'", nometabella,matricola);
+        log(q);
+        ResultSet r = runQuery(q);
+
+        if (r.next()){
+            String nome = r.getString("nome");
+            String cognome = r.getString("cognome");
+            return new String[]{nome, cognome};
+        }
+        return null;
     }
 
 }
