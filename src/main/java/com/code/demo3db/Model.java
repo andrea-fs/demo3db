@@ -68,7 +68,8 @@ public class Model {
                 "password VARCHAR(200), " +
                 "nome VARCHAR(200), " +
                 "cognome VARCHAR(200), " +
-                "type VARCHAR(200)" +
+                "type VARCHAR(200), " +
+                "medico_associato VARCHAR(200)" +
                 ");";
 
         log(s);
@@ -89,15 +90,15 @@ public class Model {
         };
     }
 
-    public void insert_raw(String tablename, String matricola, String password, String nome, String cognome, String type){
+    public void insert_raw(String tablename, String matricola, String password, String nome, String cognome, String type, String medico_associato){
 
         try{
             //String query = "insert into "+tablename+"(name,password) "+"values('"+name+","+password+");";
-            String q = String.format("insert into %s(matricola,password,nome,cognome,type) values('%s', '%s', '%s', '%s', '%s');",tablename, matricola, password, nome, cognome,type);
+            String q = String.format("insert into %s(matricola,password,nome,cognome,type,medico_associato) values('%s', '%s', '%s', '%s', '%s', '%s');", tablename, matricola, password, nome, cognome, type, medico_associato);
             log(q);
             runStatement(q);
 
-            ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, type);
+            ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, type, medico_associato);
             archivioRows.add(row);
         }catch (Exception e){
             System.out.println(e);
@@ -138,10 +139,7 @@ public class Model {
         String q = "SELECT * FROM information_schema.tables WHERE table_name = '"+table_name+"'";
         log(q);
         ResultSet rs = runQuery(q);
-        System.out.println("SEEEEEEEE" +
-                "eeeeee" +
-                "eeee" +
-                "eee");
+        System.out.println("Si");
         return rs.next();
     }
     public void setUser(String user) throws SQLException{
@@ -190,8 +188,9 @@ public class Model {
             String nome = rs.getString("nome");
             String cognome = rs.getString("cognome");
             String medicoPaziente = rs.getString("type");
+            String medico_associato = rs.getString("medico_associato");
 
-            ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, medicoPaziente);
+            ArchivioRow row = new ArchivioRow(matricola, password, nome, cognome, medicoPaziente, medico_associato);
             tempList.add(row);
         }
 

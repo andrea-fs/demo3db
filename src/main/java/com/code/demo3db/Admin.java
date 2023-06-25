@@ -58,6 +58,8 @@ public class Admin implements Initializable {
     private TextField cognome;
     @FXML
     private ChoiceBox<String> MedicoPaziente;
+    @FXML
+    private TextField medicoassociato;
     private String tablename = "archivio";
     // TODO IMPORTANTE CONTROLLA INSERIMENTO MINIMO PASSEORD ECC. !!!!!!!!!!
     @Override
@@ -89,9 +91,10 @@ public class Admin implements Initializable {
         String nomeText = nome.getText();
         String cognomeText = cognome.getText();
         String medicoPazienteValue = MedicoPaziente.getValue();
+        String medico_associato = medicoassociato.getText();
 
-        ArchivioRow row = new ArchivioRow(matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue);
-        model.insert_raw(tablename,matricolaText,passwordText,nomeText,cognomeText, medicoPazienteValue);
+        ArchivioRow row = new ArchivioRow(matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue, medico_associato);
+        model.insert_raw(tablename,matricolaText,passwordText,nomeText,cognomeText, medicoPazienteValue, medico_associato);
         //tabella.getItems().add(row);
 
         matricola.clear();
@@ -99,6 +102,7 @@ public class Admin implements Initializable {
         nome.clear();
         cognome.clear();
         MedicoPaziente.setValue("M");
+        medicoassociato.clear();
     }
 
     public void remove_tupla(ActionEvent event) throws SQLException {

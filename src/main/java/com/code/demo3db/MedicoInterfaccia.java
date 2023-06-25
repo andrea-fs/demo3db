@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -51,6 +52,7 @@ public class MedicoInterfaccia implements Initializable {
     @FXML
     private Label cognome;
     private  Model model;
+    private String matricola_P = "a";
 
 
 
@@ -109,9 +111,12 @@ public class MedicoInterfaccia implements Initializable {
         contentArea.getChildren().setAll(fxml);
     }
     public void terapia(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("Terapia.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Terapia.fxml"));
+        Parent fxml = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
+        Terapia therapy = loader.getController();
+        therapy.initializeData(nomeUtente, matricola_P);
     }
     public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("RiepilogoMedico.fxml"));

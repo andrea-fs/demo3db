@@ -25,10 +25,10 @@ import java.util.logging.Logger;
 public class PazienteInterfaccia implements Initializable{
 
 
-    private final String COLORE_STATICO = "-fx-background-color: #ffe57f";
-    private final String COLORE_DINAMICO = "-fx-background-color: #ffd600";
-    private final String DASHBOARD_STATICO = "-fx-background-color: #ffe57f";
-    private final String DASHBOARD_DINAMICO = "-fx-background-color:  #ffd600; -fx-font-weight: bold;";
+    private final String COLORE_STATICO = "-fx-background-color: #dcedc8";
+    private final String COLORE_DINAMICO = "-fx-background-color: #aed581";
+    private final String DASHBOARD_STATICO = "-fx-background-color: #dcedc8";
+    private final String DASHBOARD_DINAMICO = "-fx-background-color: #aed581; -fx-font-weight: bold;";
 
     @FXML
     private Button indietro = new Button();
@@ -133,9 +133,12 @@ public class PazienteInterfaccia implements Initializable{
         contentArea.getChildren().setAll(fxml);
     }
     public void inserimento(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("Inserimento.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Inserimento.fxml"));
+        Parent fxml = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
+        Inserimento inserimentodati = loader.getController();
+        inserimentodati.initializeData(nomeUtente);
     }
     public void contatti(javafx.event.ActionEvent actionEvent) throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Contatti.fxml"));

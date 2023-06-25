@@ -8,13 +8,17 @@ public class ArchivioRow {
     private SimpleStringProperty nome;
     private SimpleStringProperty cognome;
     private SimpleStringProperty medicoPaziente;
+    private SimpleStringProperty medicoAssociato;
 
-    public ArchivioRow(String matricola, String password, String nome, String cognome, String medicoPaziente) {
+
+
+    public ArchivioRow(String matricola, String password, String nome, String cognome, String medicoPaziente, String medico_associato) {
         this.matricola = new SimpleStringProperty(matricola);
         this.password = new SimpleStringProperty(password);
         this.nome = new SimpleStringProperty(nome);
         this.cognome = new SimpleStringProperty(cognome);
         this.medicoPaziente = new SimpleStringProperty(medicoPaziente);
+        this.medicoAssociato = new SimpleStringProperty(medico_associato);
     }
 
     public String getMatricola() {
@@ -55,5 +59,13 @@ public class ArchivioRow {
 
     public SimpleStringProperty medicoPazienteProperty() {
         return medicoPaziente;
+    }
+
+    public String getMedicoAssociato() {
+        return medicoAssociato.get();
+    }
+
+    public SimpleStringProperty medicoAssociatoProperty() {
+        return medicoAssociato;
     }
 }
