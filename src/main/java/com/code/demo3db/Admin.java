@@ -59,7 +59,7 @@ public class Admin implements Initializable {
     @FXML
     private ChoiceBox<String> MedicoPaziente;
     @FXML
-    private TextField medicoassociato;
+    private TextField medicoAssociato;
     private String tablename = "archivio";
     // TODO IMPORTANTE CONTROLLA INSERIMENTO MINIMO PASSEORD ECC. !!!!!!!!!!
     @Override
@@ -73,6 +73,7 @@ public class Admin implements Initializable {
             tabella.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("nome"));
             tabella.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("cognome"));
             tabella.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("medicoPaziente"));
+            tabella.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("MedicoAssociato"));
 
 
             MedicoPaziente.getItems().addAll("M", "P");
@@ -91,7 +92,7 @@ public class Admin implements Initializable {
         String nomeText = nome.getText();
         String cognomeText = cognome.getText();
         String medicoPazienteValue = MedicoPaziente.getValue();
-        String medico_associato = medicoassociato.getText();
+        String medico_associato = medicoAssociato.getText();
 
         ArchivioRow row = new ArchivioRow(matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue, medico_associato);
         model.insert_raw(tablename,matricolaText,passwordText,nomeText,cognomeText, medicoPazienteValue, medico_associato);
@@ -102,7 +103,7 @@ public class Admin implements Initializable {
         nome.clear();
         cognome.clear();
         MedicoPaziente.setValue("M");
-        medicoassociato.clear();
+        medicoAssociato.clear();
     }
 
     public void remove_tupla(ActionEvent event) throws SQLException {

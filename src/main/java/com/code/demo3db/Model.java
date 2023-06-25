@@ -5,6 +5,9 @@ import java.sql.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.code.demo3db.ArchivioRow;
 
@@ -209,6 +212,22 @@ public class Model {
             return new String[]{nome, cognome};
         }
         return null;
+    }
+    public List<Paziente> getPazientiByMedico(String matricolaMedico) throws SQLException {
+        System.out.println("ouououououo" + matricolaMedico);
+        List<Paziente> pazienti = new ArrayList<>();
+        String query = "SELECT matricola, nome, cognome FROM archivio WHERE medico_associato = '" + matricolaMedico + "'";
+        ResultSet rs = runQuery(query);
+
+        while (rs.next()) {
+            String matricola = rs.getString("matricola");
+            System.out.println("qui " + matricola);
+            String nome = rs.getString("nome");
+            String cognome = rs.getString("cognome");
+            Paziente paziente = new Paziente(matricola, nome, cognome);
+            pazienti.add(paziente);
+        }
+        return pazienti;
     }
 
 }

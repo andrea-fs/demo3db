@@ -64,9 +64,11 @@ public class MedicoInterfaccia implements Initializable {
         indietro.setOnMouseExited(e-> indietro.setStyle(COLORE_STATICO));
 
         try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("ScegliPaziente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RiepilogoMedico.fxml"));
+            Parent fxml = loader.load();
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
+
         } catch (IOException e){
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -106,9 +108,13 @@ public class MedicoInterfaccia implements Initializable {
         }
     }
     public void pazeinte(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("ScegliPaziente.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
+        Parent fxml = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
+        ScegliPaziente scegli = loader.getController();
+        scegli.initializeData(nomeUtente);
+        System.out.println("vvvvv" + nomeUtente);
     }
     public void terapia(javafx.event.ActionEvent actionEvent) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Terapia.fxml"));

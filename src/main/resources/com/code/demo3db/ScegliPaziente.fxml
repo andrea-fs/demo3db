@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
 <Pane prefHeight="392.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.ScegliPaziente">
-    <children>
-        <Label layoutX="229.0" layoutY="218.0" text="paziente">
-            <font>
-                <Font name="System Bold" size="36.0" />
-            </font>
-        </Label>
-    </children>
+   <children>
+      <TableView fx:id="tabella" layoutX="254.0" prefHeight="392.0" prefWidth="257.0">
+        <columns>
+          <TableColumn fx:id="colonnaMatricola" prefWidth="75.0" text="C1" />
+            <TableColumn fx:id="colonnaCognome" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="colonnaNome" prefWidth="75.0" text="Column X" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Seleziona il paziente" />
+   </children>
 </Pane>
