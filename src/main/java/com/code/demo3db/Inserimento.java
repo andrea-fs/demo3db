@@ -167,6 +167,10 @@ public class Inserimento implements Initializable {
                     datanonvalida.setTextFill(Color.RED);
                     System.out.println("errore nel try di prase");
                     return;
+                } catch (Exception e) {
+                    datanonvalida.setTextFill(Color.RED);
+                    System.out.println("errore nel try di prase");
+                    return;
                 }
             }
         }

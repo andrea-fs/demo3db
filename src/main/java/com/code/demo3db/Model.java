@@ -78,6 +78,7 @@ public class Model {
         log(s);
         runStatement(s);
     }
+    // TODO che il medico non abbia medico associato
     Model() throws SQLException {
         connessione();
         archivioRows = FXCollections.observableArrayList(); // Inizializza la lista archivioRows
@@ -228,6 +229,18 @@ public class Model {
             pazienti.add(paziente);
         }
         return pazienti;
+    }
+    public String getMedicoAssociato(String matricola) throws SQLException {
+        String q = "SELECT medico_associato FROM archivio WHERE matricola = '" + matricola + "'";
+        log(q);
+        System.out.println(matricola + "<- matricola");
+        ResultSet rs = runQuery(q);
+        if (rs.next()) {
+            System.out.println("quiquiqui");
+            return rs.getString("medico_associato");
+        } else {
+            return null;
+        }
     }
 
 }

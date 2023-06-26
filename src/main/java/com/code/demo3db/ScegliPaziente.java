@@ -4,6 +4,7 @@ import com.code.demo3db.Paziente;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -14,6 +15,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ScegliPaziente implements Initializable {
+    private MedicoInterfaccia medicoInterfacciaController;
+
     @FXML
     private TableView<Paziente> tabella;
     @FXML
@@ -21,7 +24,10 @@ public class ScegliPaziente implements Initializable {
     @FXML
     private TableColumn<Paziente, String> colonnaNome;
     @FXML
-    private TableColumn<Paziente, String> colonnaCognome;    private String matricola;
+    private TableColumn<Paziente, String> colonnaCognome;
+    private String matricola;
+    @FXML
+    private Label selezionato;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabella.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -29,6 +35,7 @@ public class ScegliPaziente implements Initializable {
         colonnaNome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNome()));
         colonnaCognome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCognome()));
         caricaPazienti();
+        selezionato.setText("clicca nella tabella un paziente");
     }
     public void initializeData(String matricola) {
         this.matricola = matricola;
@@ -40,8 +47,22 @@ public class ScegliPaziente implements Initializable {
             Model model = Model.getInstance();
             List<Paziente> pazienti = model.getPazientiByMedico(matricola);
             tabella.getItems().addAll(pazienti);
+
+            tabella.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1) {
+                    Paziente pazienteSelezionato = tabella.getSelectionModel().getSelectedItem();
+                    if (pazienteSelezionato != null) {
+                        String matricolaSelezionata = pazienteSelezionato.getMatricola();
+                        medicoInterfacciaController.setMatricola_P(matricolaSelezionata);
+                        selezionato.setText(matricolaSelezionata);
+                    }
+                }
+            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void setMedicoInterfacciaController(MedicoInterfaccia controller) {
+        this.medicoInterfacciaController = controller;
     }
 }

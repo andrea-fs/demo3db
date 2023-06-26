@@ -52,7 +52,7 @@ public class MedicoInterfaccia implements Initializable {
     @FXML
     private Label cognome;
     private  Model model;
-    private String matricola_P = "a";
+    private String matricola_P = "";
 
 
 
@@ -64,10 +64,14 @@ public class MedicoInterfaccia implements Initializable {
         indietro.setOnMouseExited(e-> indietro.setStyle(COLORE_STATICO));
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RiepilogoMedico.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
             Parent fxml = loader.load();
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
+            ScegliPaziente scegli = loader.getController();
+            scegli.setMedicoInterfacciaController(this);
+            scegli.initializeData(nomeUtente);
+            System.out.println("vvvvv" + nomeUtente);
 
         } catch (IOException e){
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
@@ -113,16 +117,29 @@ public class MedicoInterfaccia implements Initializable {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
         ScegliPaziente scegli = loader.getController();
+        scegli.setMedicoInterfacciaController(this);
         scegli.initializeData(nomeUtente);
         System.out.println("vvvvv" + nomeUtente);
     }
     public void terapia(javafx.event.ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Terapia.fxml"));
-        Parent fxml = loader.load();
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
-        Terapia therapy = loader.getController();
-        therapy.initializeData(nomeUtente, matricola_P);
+        if(!matricola_P.isEmpty()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Terapia.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            Terapia therapy = loader.getController();
+            therapy.initializeData(nomeUtente, matricola_P);
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            ScegliPaziente scegli = loader.getController();
+            scegli.setMedicoInterfacciaController(this);
+            scegli.initializeData(nomeUtente);
+            System.out.println("vvvvv" + nomeUtente);
+        }
     }
     public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("RiepilogoMedico.fxml"));
@@ -137,5 +154,10 @@ public class MedicoInterfaccia implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setMatricola_P(String matricolaSelezionata) {
+        matricola_P = matricolaSelezionata;
+        System.out.println(matricola_P);
     }
 }

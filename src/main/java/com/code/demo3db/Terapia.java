@@ -86,6 +86,8 @@ public class Terapia implements Initializable {
                 System.out.println("Errore di formattazione della data: " + e.getMessage());
             }
         }
+        farmaco.clear();
+
     }
 
 

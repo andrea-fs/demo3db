@@ -80,9 +80,12 @@ public class PazienteInterfaccia implements Initializable{
         //mainPane.setMinSize(500, 200);
 
         try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent fxml = loader.load();
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
+            Home home = loader.getController();
+            home.initializeData(nomeUtente);
         } catch (IOException e){
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -128,9 +131,12 @@ public class PazienteInterfaccia implements Initializable{
     }
 
     public void home(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        Parent fxml = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
+        Home home = loader.getController();
+        home.initializeData(nomeUtente);
     }
     public void inserimento(javafx.event.ActionEvent actionEvent) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Inserimento.fxml"));
@@ -141,9 +147,14 @@ public class PazienteInterfaccia implements Initializable{
         inserimentodati.initializeData(nomeUtente);
     }
     public void contatti(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("Contatti.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Contatti.fxml"));
+        Parent fxml = loader.load();
+        Contatti contatti = loader.getController();
+        contatti.initializeData(nomeUtente);
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
+
+
     }
     public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Riepilogo.fxml"));

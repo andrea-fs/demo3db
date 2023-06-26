@@ -116,4 +116,15 @@ public class DataModel {
             return false;
         }
     }
+    public int countAcquisizioni(String farmaco, LocalDate data) throws SQLException {
+        String query = "SELECT COUNT(*) FROM dati WHERE farmaco = '" + farmaco + "' AND data = '" + data + "'";
+        log(query);
+
+        ResultSet rs = runQuery(query);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
 }

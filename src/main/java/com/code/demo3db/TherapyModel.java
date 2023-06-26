@@ -2,6 +2,8 @@ package com.code.demo3db;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TherapyModel {
 
@@ -99,5 +101,23 @@ public class TherapyModel {
         runStatement(insertQuery);
     }
 
+    public List<TerapiaClass> getTerapieByMatricola(String matricola) throws SQLException {
+        List<TerapiaClass> terapie = new ArrayList<>();
+
+        String query = "SELECT data_fine, farmaco, dose, acquisizioni FROM therapy WHERE matricola_P = '" + matricola + "'";
+        ResultSet rs = runQuery(query);
+
+        while (rs.next()) {
+            LocalDate dataFine = rs.getDate("data_fine").toLocalDate();
+            String farmaco = rs.getString("farmaco");
+            int dose = rs.getInt("dose");
+            int acquisizioni = rs.getInt("acquisizioni");
+
+            TerapiaClass terapia = new TerapiaClass(dataFine, farmaco, dose, acquisizioni);
+            terapie.add(terapia);
+        }
+
+        return terapie;
+    }
 
 }
