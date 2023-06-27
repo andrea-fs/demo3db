@@ -214,10 +214,9 @@ public class Model {
         }
         return null;
     }
-    public List<Paziente> getPazientiByMedico(String matricolaMedico) throws SQLException {
-        System.out.println("ouououououo" + matricolaMedico);
+    public List<Paziente> getPazientiByMedico() throws SQLException {
         List<Paziente> pazienti = new ArrayList<>();
-        String query = "SELECT matricola, nome, cognome FROM archivio WHERE medico_associato = '" + matricolaMedico + "'";
+        String query = "SELECT matricola, nome, cognome FROM archivio WHERE type = 'P'";
         ResultSet rs = runQuery(query);
 
         while (rs.next()) {

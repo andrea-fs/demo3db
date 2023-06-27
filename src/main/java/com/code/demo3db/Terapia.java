@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -23,6 +24,8 @@ public class Terapia implements Initializable {
     private Spinner<Integer> dose;
     @FXML
     private Spinner<Integer> acquisizioni;
+    @FXML
+    private Label nonInserito;
     private String matricola_M;
     private String matricola_P;
     TherapyModel model;
@@ -34,6 +37,7 @@ public class Terapia implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        nonInserito.setText("");
         try {
             model = TherapyModel.getInstance();
         } catch (SQLException e) {
@@ -67,7 +71,9 @@ public class Terapia implements Initializable {
 
     @FXML
     void insertData(ActionEvent event) {
-        if (data.getValue() != null) {
+        nonInserito.setText("");
+        String text = farmaco.getText();
+        if (data.getValue() != null && !text.isEmpty()) {
             LocalDate selectedDate = data.getValue();
 
             try {
@@ -85,6 +91,10 @@ public class Terapia implements Initializable {
             } catch (DateTimeParseException e) {
                 System.out.println("Errore di formattazione della data: " + e.getMessage());
             }
+        }
+        else{
+            nonInserito.setText("Problema con l'inserimento, riprovare");
+            nonInserito.setTextFill(Color.DARKRED);
         }
         farmaco.clear();
 

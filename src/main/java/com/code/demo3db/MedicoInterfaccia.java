@@ -121,8 +121,12 @@ public class MedicoInterfaccia implements Initializable {
         scegli.initializeData(nomeUtente);
         System.out.println("vvvvv" + nomeUtente);
     }
-    public void terapia(javafx.event.ActionEvent actionEvent) throws IOException{
-        if(!matricola_P.isEmpty()) {
+    public void terapia(javafx.event.ActionEvent actionEvent) throws IOException, SQLException {
+        String medico_associato;
+        Model model = Model.getInstance();
+        medico_associato = model.getMedicoAssociato(matricola_P);
+
+        if(!matricola_P.isEmpty() && medico_associato.equals(this.nomeUtente)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Terapia.fxml"));
             Parent fxml = loader.load();
             contentArea.getChildren().removeAll();
@@ -139,12 +143,29 @@ public class MedicoInterfaccia implements Initializable {
             scegli.setMedicoInterfacciaController(this);
             scegli.initializeData(nomeUtente);
             System.out.println("vvvvv" + nomeUtente);
+            scegli.selezionarePazienteAdatto();
         }
     }
     public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("RiepilogoMedico.fxml"));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        if(!matricola_P.isEmpty()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RiepilogoMedico.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            RiepilogoMedico riepilogoMedico = loader.getController();
+            riepilogoMedico.initializeData(nomeUtente, matricola_P);
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            ScegliPaziente scegli = loader.getController();
+            scegli.setMedicoInterfacciaController(this);
+            scegli.initializeData(nomeUtente);
+            System.out.println("vvvvv" + nomeUtente);
+            scegli.selezionarePazienteAdatto();
+        }
     }
     @FXML
     public void indietro(ActionEvent eventIndietro) throws IOException {

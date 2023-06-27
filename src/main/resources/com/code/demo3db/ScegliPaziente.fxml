@@ -31,5 +31,6 @@
             <Font name="Corbel Light" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="scegliPazienteAdatto" layoutX="40.0" layoutY="48.0" text="Seleziona una un paziente adatto" textFill="#891d1d" />
    </children>
 </Pane>

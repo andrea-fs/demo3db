@@ -25,6 +25,7 @@
       <TextField fx:id="password" layoutX="14.0" layoutY="107.0" />
       <TextField fx:id="nome" layoutX="14.0" layoutY="151.0" />
       <TextField fx:id="cognome" layoutX="14.0" layoutY="195.0" />
+      <TextField fx:id="medicoAssociato" layoutX="13.0" layoutY="283.0" />
       <Label layoutX="14.0" layoutY="14.0" text="Amministrazione archivio">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -35,11 +36,10 @@
       <Label layoutX="14.0" layoutY="133.0" text="Nome" />
       <Label layoutX="14.0" layoutY="177.0" text="Cognome" />
       <Label layoutX="14.0" layoutY="221.0" text="Paziente (P) o Medico (M)?" />
+      <Label layoutX="13.0" layoutY="267.0" text="Medico associato" />
       <ChoiceBox fx:id="MedicoPaziente" layoutX="14.0" layoutY="239.0" prefWidth="150.0" />
       <Button fx:id="insert_button" layoutX="14.0" layoutY="321.0" mnemonicParsing="false" onAction="#insert_tupla" text="Inserimento" />
       <Button fx:id="remove_button" layoutX="138.0" layoutY="322.0" mnemonicParsing="false" onAction="#remove_tupla" text="Rimozione" />
       <Button fx:id="indietro" layoutX="12.0" layoutY="367.0" mnemonicParsing="false" onAction="#indietro" text="Torna alla schermata di login" textFill="#8c1a1a" />
-      <TextField fx:id="medicoassociato" layoutX="13.0" layoutY="283.0" />
-      <Label layoutX="13.0" layoutY="267.0" text="Medico associato" />
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -28,6 +29,8 @@ public class ScegliPaziente implements Initializable {
     private String matricola;
     @FXML
     private Label selezionato;
+    @FXML
+    private Label scegliPazienteAdatto;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabella.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -36,6 +39,7 @@ public class ScegliPaziente implements Initializable {
         colonnaCognome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCognome()));
         caricaPazienti();
         selezionato.setText("clicca nella tabella un paziente");
+        scegliPazienteAdatto.setText("");
     }
     public void initializeData(String matricola) {
         this.matricola = matricola;
@@ -45,7 +49,7 @@ public class ScegliPaziente implements Initializable {
 
         try {
             Model model = Model.getInstance();
-            List<Paziente> pazienti = model.getPazientiByMedico(matricola);
+            List<Paziente> pazienti = model.getPazientiByMedico();
             tabella.getItems().addAll(pazienti);
 
             tabella.setOnMouseClicked(event -> {
@@ -64,5 +68,9 @@ public class ScegliPaziente implements Initializable {
     }
     public void setMedicoInterfacciaController(MedicoInterfaccia controller) {
         this.medicoInterfacciaController = controller;
+    }
+    public void selezionarePazienteAdatto(){
+        scegliPazienteAdatto.setText("Seleziona un paziente adatto");
+        scegliPazienteAdatto.setTextFill(Color.DARKRED);
     }
 }
