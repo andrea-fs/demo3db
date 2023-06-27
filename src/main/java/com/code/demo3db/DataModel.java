@@ -35,10 +35,10 @@ public class DataModel {
         connessione();
         if (tableExists("dati"))
         {
-            log("archivio table exists");
+            log("fattori table exists");
         }
         else {
-            log("archivio table DO NOT exists");
+            log("fattori table DO NOT exists");
             resetDatiTable();
         };
     }

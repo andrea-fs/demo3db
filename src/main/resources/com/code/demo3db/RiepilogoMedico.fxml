@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -15,17 +17,16 @@
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <TableView layoutX="12.0" layoutY="284.0" prefHeight="208.0" prefWidth="564.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3ccff" height="200.0" layoutX="193.0" layoutY="-133.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3ccff" height="69.0" layoutX="193.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
         <Label layoutX="212.0" layoutY="14.0" text="Riepilogo" textFill="#0c1b1b">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
+      <TextField fx:id="fattoriDiRischio" layoutX="12.0" layoutY="290.0" />
+      <TextField fx:id="coomorbidita" layoutX="12.0" layoutY="333.0" />
+      <TextField fx:id="patologie" layoutX="12.0" layoutY="367.0" />
+      <TextField fx:id="altro" layoutX="14.0" layoutY="407.0" />
+      <Button fx:id="insert" layoutX="293.0" layoutY="345.0" mnemonicParsing="false" onAction="#inserRaw" text="Button" />
     </children>
 </Pane>
