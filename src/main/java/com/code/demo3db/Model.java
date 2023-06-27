@@ -24,13 +24,13 @@ public class Model {
     }
     public Connection connessione(){
         conn = null;
-        String dbname = "trydb";
-        String username = "postgres";
-        String password = "dbandre";
+        String dbname = "ApplicationDB";
+        String username = "avnadmin";
+        String password = "AVNS_34XZTsENHTu7KB5yZ1v";
 
         try{
             Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,username,password);
+            conn = DriverManager.getConnection("jdbc:postgresql://pg-1fbe096a-niccolozen5-8565.aivencloud.com:16963/"+dbname,username,password);
             if (conn != null){
                 System.out.println("Connection established");
             }
