@@ -43,7 +43,7 @@ public class ScegliPaziente implements Initializable {
     }
     public void initializeData(String matricola) {
         this.matricola = matricola;
-        caricaPazienti();
+        //caricaPazienti();
     }
     private void caricaPazienti() {
 
