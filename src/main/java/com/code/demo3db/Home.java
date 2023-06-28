@@ -2,7 +2,10 @@ package com.code.demo3db;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.sql.Date;
@@ -29,6 +32,10 @@ public class Home implements Initializable {
     private Label quantiTerapia3;
     @FXML
     private Label quantiTerapia4;
+    @FXML
+    private Circle cerchio;
+    @FXML
+    private Button caricaTerapie;
     private TherapyModel model;
     private DataModel datamodel;
     private String matricola;
@@ -36,12 +43,12 @@ public class Home implements Initializable {
     private String farmacoT2;
     private String farmacoT3;
     private String farmacoT4;
-    private int daFareT1;
-    private int daFareT2;
+    private int daFareT1 = 0;
+    private int daFareT2 = 0;
 
-    private int daFareT3;
+    private int daFareT3 = 0;
 
-    private int daFareT4;
+    private int daFareT4 = 0;
 
     private LocalDate dataOggi = LocalDate.now();;
 
@@ -66,15 +73,23 @@ public class Home implements Initializable {
         quantiTerapia2.setText(null);
         quantiTerapia3.setText(null);
         quantiTerapia4.setText(null);
-
-        initializeData(matricola); //TODO
+        cerchio.setFill(Color.DARKRED);
     }
     public void initializeData(String nomeUtente) {
         matricola = nomeUtente;
-        System.out.println(matricola);
+        System.out.println( matricola + "initializeData");
+        //carica();
+    }
+    @FXML
+    private void carica(){
+        int acquisizioniTerapia1 = 0;
+        int acquisizioniTerapia2 = 0;
+        int acquisizioniTerapia3 = 0;
+        int acquisizioniTerapia4 = 0;
 
         try {
             List<TerapiaClass> terapie = model.getTerapieByMatricola(matricola);
+            System.out.println(matricola + "carica");
 
             if (terapie.size() >= 1) {
                 TerapiaClass terapia1 = terapie.get(0);
@@ -112,27 +127,31 @@ public class Home implements Initializable {
             e.printStackTrace();
         }
 
+
+
         try {
             System.out.println("aaa" + farmacoT1 + LocalDate.now());
-            int acquisizioniTerapia1 = datamodel.countAcquisizioni(farmacoT1,LocalDate.now());
-            if(acquisizioniTerapia1 != 0) {
+            acquisizioniTerapia1 = datamodel.countAcquisizioni(farmacoT1, LocalDate.now());
+            if (acquisizioniTerapia1 != 0) {
                 quantiTerapia1.setText("Fatte: " + acquisizioniTerapia1 + "/" + daFareT1);
             }
-            int acquisizioniTerapia2 = datamodel.countAcquisizioni(farmacoT2, LocalDate.now());
-            if(acquisizioniTerapia2 != 0) {
+            acquisizioniTerapia2 = datamodel.countAcquisizioni(farmacoT2, LocalDate.now());
+            if (acquisizioniTerapia2 != 0) {
                 quantiTerapia2.setText("Fatte: " + acquisizioniTerapia2 + "/" + daFareT2);
             }
-            int acquisizioniTerapia3 = datamodel.countAcquisizioni(farmacoT3, LocalDate.now());
-            if(acquisizioniTerapia3 != 0) {
+            acquisizioniTerapia3 = datamodel.countAcquisizioni(farmacoT3, LocalDate.now());
+            if (acquisizioniTerapia3 != 0) {
                 quantiTerapia3.setText("Fatte: " + acquisizioniTerapia3 + "/" + daFareT3);
             }
-            int acquisizioniTerapia4 = datamodel.countAcquisizioni(farmacoT4, LocalDate.now());
-            if(acquisizioniTerapia4 != 0) {
+            acquisizioniTerapia4 = datamodel.countAcquisizioni(farmacoT4, LocalDate.now());
+            if (acquisizioniTerapia4 != 0) {
                 quantiTerapia4.setText("Fatte: " + acquisizioniTerapia4 + "/" + daFareT4);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        if (acquisizioniTerapia1 == daFareT1 && acquisizioniTerapia2 == daFareT2 && acquisizioniTerapia3 == daFareT3 && acquisizioniTerapia4 == daFareT4){cerchio.setFill(Color.GREEN);}
+
     }
     private void setTerapiaLabel(Label label, TerapiaClass terapia) {
         String text = "Data fine: " + terapia.getDataFine() +

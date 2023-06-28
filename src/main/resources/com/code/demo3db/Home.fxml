@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
@@ -12,27 +13,28 @@
                 <Font name="Cambria Bold" size="40.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="80.0" text="Notifiche dal medico">
-            <font>
-                <Font name="Century Gothic Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="14.0" layoutY="154.0" text="Oggi ho inserito i dati?">
-            <font>
-                <Font name="Century Gothic Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="14.0" layoutY="235.0" text="Terapie da seguire">
-            <font>
-                <Font name="Century Gothic Bold" size="12.0" />
-            </font></Label>
-        <Circle fill="#ff831f" layoutX="164.0" layoutY="162.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-        <Label fx:id="terapia1" layoutX="14.0" layoutY="267.0" text="Terapia 1" />
-        <Label fx:id="terapia2" layoutX="14.0" layoutY="320.0" text="Terapia 2" />
-        <Label fx:id="terapia3" layoutX="14.0" layoutY="374.0" text="Terapia 3" />
-        <Label fx:id="terapia4" layoutX="14.0" layoutY="429.0" text="Terapia 4" />
-        <Label fx:id="quantiTerapia1" layoutX="14.0" layoutY="294.0" text="Label" />
-        <Label fx:id="quantiTerapia2" layoutX="14.0" layoutY="345.0" text="Label" />
-        <Label fx:id="quantiTerapia3" layoutX="14.0" layoutY="394.0" text="Label" />
-        <Label fx:id="quantiTerapia4" layoutX="16.0" layoutY="450.0" text="Label" />
+      <Label layoutX="14.0" layoutY="80.0" text="Notifiche dal medico">
+         <font>
+            <Font name="Century Gothic Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="14.0" layoutY="154.0" text="Oggi ho inserito i dati?">
+         <font>
+            <Font name="Century Gothic Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="14.0" layoutY="235.0" text="Terapie da seguire">
+         <font>
+            <Font name="Century Gothic Bold" size="12.0" />
+         </font></Label>
+      <Circle fx:id="cerchio" fill="#ff831f" layoutX="156.0" layoutY="162.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label fx:id="terapia1" layoutX="14.0" layoutY="267.0" text="Terapia 1" />
+      <Label fx:id="terapia2" layoutX="14.0" layoutY="320.0" text="Terapia 2" />
+      <Label fx:id="terapia3" layoutX="14.0" layoutY="374.0" text="Terapia 3" />
+      <Label fx:id="terapia4" layoutX="14.0" layoutY="429.0" text="Terapia 4" />
+      <Label fx:id="quantiTerapia1" layoutX="14.0" layoutY="294.0" text="Label" />
+      <Label fx:id="quantiTerapia2" layoutX="14.0" layoutY="345.0" text="Label" />
+      <Label fx:id="quantiTerapia3" layoutX="14.0" layoutY="394.0" text="Label" />
+      <Label fx:id="quantiTerapia4" layoutX="16.0" layoutY="450.0" text="Label" />
+      <Button fx:id="caricaTerapie" layoutX="13.0" layoutY="185.0" mnemonicParsing="false" onAction="#carica" style="-fx-text-fill: #111111; -fx-background-color: #dcedc8;" text="Carica le terapie" />
     </children>
 
 </Pane>
