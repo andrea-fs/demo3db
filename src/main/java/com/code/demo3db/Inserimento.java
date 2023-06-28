@@ -61,10 +61,10 @@ public class Inserimento implements Initializable {
 
         //int orattuale = LocalTime.now().getHour();
         SpinnerValueFactory<Integer> valueSBP
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(80, 200, 120);
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 200, 0);
         SBP.setValueFactory(valueSBP);
         SpinnerValueFactory<Integer> valueDBP
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 130, 80);
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 130, 0);
         DBP.setValueFactory(valueDBP);
         SpinnerValueFactory<Integer> valueOra
                 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 12);
