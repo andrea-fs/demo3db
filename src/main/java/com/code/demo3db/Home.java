@@ -138,7 +138,7 @@ public class Home implements Initializable {
         String text = "Data fine: " + terapia.getDataFine() +
                 "  Farmaco: " + terapia.getFarmaco() +
                 "  Dose: " + terapia.getDose() +
-                "  Acquisizioni gionraliere: " + terapia.getAcquisizioni();
+                "  Acquisizioni giornaliere: " + terapia.getAcquisizioni();
 
         label.setText(text);
     }

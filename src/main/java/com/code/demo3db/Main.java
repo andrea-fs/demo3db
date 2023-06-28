@@ -5,10 +5,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
@@ -33,6 +36,12 @@ public class Main extends Application{   //TODO mettere vincoli su lunghezze x e
         stage.setTitle("Autenticazione");
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest(event -> {
+            event.consume();
+            indietro(stage);
+        });
+
     }
     public static void main(String[] args) throws SQLException {
         Model db = new Model();
@@ -42,5 +51,18 @@ public class Main extends Application{   //TODO mettere vincoli su lunghezze x e
         //db.insert_raw("archivio","P1","ciao","Fra","Si","P");
         //db.insert_raw("archivio","P2","bo","Gio","Se","P");
         launch();
+    }
+
+    public void indietro (Stage stage) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Stai per chiudere l'applicazione");
+        alert.setContentText("Termino applicazione?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+
+            stage.close();
+        }
     }
 }
