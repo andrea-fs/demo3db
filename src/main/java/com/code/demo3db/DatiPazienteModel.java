@@ -2,6 +2,10 @@ package com.code.demo3db;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DatiPazienteModel {
     private Connection conn;
@@ -93,5 +97,35 @@ public class DatiPazienteModel {
             System.out.println(e);
             System.out.println("non inserito");
         }
+    }
+    public List<FattoreRischio> getFattoriRischioByMatricola(String matricola) {
+        List<FattoreRischio> fattoriRischioList = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM fattori WHERE matricola = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, matricola);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String matricolaPaziente = rs.getString("matricola");
+                String fattoriRischio = rs.getString("Fattori_di_rischio");
+                String patologie = rs.getString("Patologie");
+                String comorbidita = rs.getString("Comorbidita");
+                String altro = rs.getString("Altro");
+                String medico = rs.getString("Medico");
+                LocalDateTime data = rs.getTimestamp("data").toLocalDateTime();
+
+                FattoreRischio fattoreRischio = new FattoreRischio(matricolaPaziente, fattoriRischio, patologie, comorbidita, altro, medico, data);
+                fattoriRischioList.add(fattoreRischio);
+            }
+
+            pstmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fattoriRischioList;
     }
 }

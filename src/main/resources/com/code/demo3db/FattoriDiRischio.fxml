@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.FattoriDiRischio">
+   <children>
+      <TextField fx:id="fattoriDiRischio" layoutX="14.0" layoutY="176.0" />
+      <TextField fx:id="patologie" layoutX="218.0" layoutY="176.0" />
+      <TextField fx:id="coomorbidita" layoutX="406.0" layoutY="176.0" />
+      <TextField fx:id="altro" layoutX="14.0" layoutY="226.0" prefHeight="26.0" prefWidth="345.0" />
+      <Label layoutX="14.0" layoutY="157.0" text="Fattori di rischio" />
+      <Label layoutX="218.0" layoutY="157.0" text="Patologie pregresse" />
+      <Label layoutX="411.0" layoutY="157.0" text="Comorbidità" />
+      <Label layoutX="14.0" layoutY="208.0" text="Altro" />
+      <TableView fx:id="tabella" layoutX="-1.0" layoutY="272.0" prefHeight="240.0" prefWidth="587.0">
+        <columns>
+          <TableColumn fx:id="colonnaMatricola" prefWidth="75.0" text="Paziente" />
+          <TableColumn fx:id="colonnaFattoriRischio" prefWidth="108.79998779296875" text="Fattori di rischio" />
+            <TableColumn fx:id="colonnaPatologia" prefWidth="41.60003662109375" text="Patologie" />
+            <TableColumn fx:id="colonnaComorbidita" prefWidth="75.0" text="comorbidità" />
+            <TableColumn fx:id="colonnaAltro" prefWidth="75.0" text="altro" />
+            <TableColumn fx:id="colonnaMatricolaMedico" prefWidth="75.0" text="modificato da" />
+            <TableColumn fx:id="colonnaData" prefWidth="75.0" text="data modifica" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="139.0" style="-fx-text-fill: #7980d3;" text="Vuoi modificare i dati?" />
+      <Label layoutX="13.0" layoutY="256.0" style="-fx-text-fill: #7980d3;" text="Storico delle modifiche" />
+      <Button fx:id="insert" layoutX="513.0" layoutY="226.0" mnemonicParsing="false" onAction="#inserRaw" style="-fx-background-color: #d3ccff;" text="Button" />
+      <Label fx:id="ultimoFattore" layoutX="107.0" layoutY="15.0" text="Label" />
+      <Label fx:id="ultimoPatologia" layoutX="128.0" layoutY="45.0" text="Label" />
+      <Label fx:id="ultimoAltro" layoutX="50.0" layoutY="106.0" text="Label" />
+      <Label fx:id="ultimoComorbidita" layoutX="87.0" layoutY="75.0" text="Label" />
+      <Label layoutX="13.0" layoutY="15.0" text="Fattori di rischio:" />
+      <Label layoutX="13.0" layoutY="45.0" text="Patologie pregresse:" />
+      <Label layoutX="13.0" layoutY="76.0" text="Comorbidità:" />
+      <Label layoutX="13.0" layoutY="106.0" text="Altro:" />
+   </children>
+</AnchorPane>

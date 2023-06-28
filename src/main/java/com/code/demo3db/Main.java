@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static javafx.application.Application.launch;
-public class Main extends Application{
+public class Main extends Application{   //TODO mettere vincoli su lunghezze x effetto grafico
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Password.fxml"));

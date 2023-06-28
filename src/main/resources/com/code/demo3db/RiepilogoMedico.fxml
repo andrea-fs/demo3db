@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.RiepilogoMedico">
     <children>
-      <TableView layoutX="12.0" layoutY="75.0" prefHeight="197.0" prefWidth="564.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3ccff" height="69.0" layoutX="193.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3ccff" height="53.0" layoutX="193.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
         <Label layoutX="212.0" layoutY="14.0" text="Riepilogo" textFill="#0c1b1b">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-      <TextField fx:id="fattoriDiRischio" layoutX="12.0" layoutY="290.0" />
-      <TextField fx:id="coomorbidita" layoutX="12.0" layoutY="333.0" />
-      <TextField fx:id="patologie" layoutX="12.0" layoutY="367.0" />
-      <TextField fx:id="altro" layoutX="14.0" layoutY="407.0" />
-      <Button fx:id="insert" layoutX="293.0" layoutY="345.0" mnemonicParsing="false" onAction="#inserRaw" text="Button" />
+      <TableView layoutX="11.0" layoutY="300.0" prefHeight="200.0" prefWidth="564.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tabellaTerapie" layoutX="14.0" layoutY="80.0" prefHeight="200.0" prefWidth="564.0">
+         <columns>
+            <TableColumn fx:id="colDataFine" prefWidth="75.0" text="C1" />
+            <TableColumn fx:id="colFarmaco" prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="colDose" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="colAcquisizioni" prefWidth="75.0" text="Column X" />
+         </columns>
+      </TableView>
+      <CheckBox fx:id="settimana" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Settimana" />
+      <CheckBox fx:id="mese" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" text="Mese" />
     </children>
 </Pane>
