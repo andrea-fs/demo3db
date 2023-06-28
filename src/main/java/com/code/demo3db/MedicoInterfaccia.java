@@ -48,6 +48,8 @@ public class MedicoInterfaccia implements Initializable {
     @FXML
     private Button buttonRiepilogo;
     @FXML
+    private Button buttonFattori;
+    @FXML
     private Label nome;
     @FXML
     private Label cognome;
@@ -85,6 +87,8 @@ public class MedicoInterfaccia implements Initializable {
         buttonTerapia.setOnMouseExited(e-> buttonTerapia.setStyle(DASHBOARD_STATICO));
         buttonRiepilogo.setOnMouseEntered(e-> buttonRiepilogo.setStyle(DASHBOARD_DINAMICO));
         buttonRiepilogo.setOnMouseExited(e-> buttonRiepilogo.setStyle(DASHBOARD_STATICO));
+        buttonFattori.setOnMouseEntered(e-> buttonFattori.setStyle(DASHBOARD_DINAMICO));
+        buttonFattori.setOnMouseExited(e-> buttonFattori.setStyle(DASHBOARD_STATICO));
 
     }
 
@@ -154,6 +158,27 @@ public class MedicoInterfaccia implements Initializable {
             contentArea.getChildren().setAll(fxml);
             RiepilogoMedico riepilogoMedico = loader.getController();
             riepilogoMedico.initializeData(nomeUtente, matricola_P);
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            ScegliPaziente scegli = loader.getController();
+            scegli.setMedicoInterfacciaController(this);
+            scegli.initializeData(nomeUtente);
+            System.out.println("vvvvv" + nomeUtente);
+            scegli.selezionarePazienteAdatto();
+        }
+    }
+    public void fattori(javafx.event.ActionEvent actionEvent) throws IOException{
+        if(!matricola_P.isEmpty()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FattoriDiRischio.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            FattoriDiRischio fattoriDiRischio = loader.getController();
+            fattoriDiRischio.initializeData(nomeUtente, matricola_P);
         }
         else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));

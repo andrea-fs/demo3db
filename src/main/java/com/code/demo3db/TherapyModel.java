@@ -75,7 +75,7 @@ public class TherapyModel {
                 "farmaco TEXT, " +
                 "dose INTEGER, " +
                 "acquisizioni INTEGER, " +
-                "PRIMARY KEY (matricola_P, data_fine)" +
+                "PRIMARY KEY (matricola_P, data_fine, farmaco)" +
                 ")";
 
         log(s);
@@ -105,6 +105,37 @@ public class TherapyModel {
         List<TerapiaClass> terapie = new ArrayList<>();
 
         String query = "SELECT data_fine, farmaco, dose, acquisizioni FROM therapy WHERE matricola_P = '" + matricola + "'";
+        ResultSet rs = runQuery(query);
+
+        while (rs.next()) {
+            LocalDate dataFine = rs.getDate("data_fine").toLocalDate();
+            String farmaco = rs.getString("farmaco");
+            int dose = rs.getInt("dose");
+            int acquisizioni = rs.getInt("acquisizioni");
+
+            TerapiaClass terapia = new TerapiaClass(dataFine, farmaco, dose, acquisizioni);
+            terapie.add(terapia);
+        }
+
+        return terapie;
+    }
+    public List<TerapiaClass> getTerapieForTable(String matricola, boolean isMeseSelected) throws SQLException {
+        List<TerapiaClass> terapie = new ArrayList<>();
+
+        LocalDate currentDate = LocalDate.now();
+
+        LocalDate maxDate;
+        if (isMeseSelected) { //
+            maxDate = currentDate.plusMonths(1);
+        } else {
+            maxDate = currentDate.plusWeeks(1);
+        }
+
+        String query = "SELECT data_fine, farmaco, dose, acquisizioni FROM therapy " +
+                "WHERE matricola_P = '" + matricola + "' " +
+                "AND data_fine > '" + currentDate + "' " +
+                "AND data_fine <= '" + maxDate + "'";
+
         ResultSet rs = runQuery(query);
 
         while (rs.next()) {
