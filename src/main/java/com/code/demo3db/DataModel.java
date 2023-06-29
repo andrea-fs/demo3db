@@ -1,8 +1,10 @@
 package com.code.demo3db;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class DataModel {
@@ -126,5 +128,34 @@ public class DataModel {
         } else {
             return 0;
         }
+    }
+    public ObservableList<Measurement> getMeasurements(String matricola, boolean isWeekSelected) throws SQLException {
+        ObservableList<Measurement> measurements = FXCollections.observableArrayList();
+
+        LocalDate startDate;
+        if (isWeekSelected) {
+            // Ottieni la data di inizio della settimana corrente
+            startDate = LocalDate.now().with(DayOfWeek.MONDAY);
+        } else {
+            // Ottieni la data di inizio del mese corrente
+            startDate = LocalDate.now().withDayOfMonth(1);
+        }
+
+        String query = "SELECT data, SBP, DBP FROM dati WHERE matricola = ? AND data >= ? ORDER BY data";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString(1, matricola);
+        statement.setDate(2, java.sql.Date.valueOf(startDate));
+
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            LocalDate date = rs.getDate("data").toLocalDate();
+            int sbp = rs.getInt("SBP");
+            int dbp = rs.getInt("DBP");
+
+            Measurement measurement = new Measurement(date, sbp, dbp);
+            measurements.add(measurement);
+        }
+
+        return measurements;
     }
 }

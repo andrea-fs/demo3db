@@ -1,8 +1,12 @@
 package com.code.demo3db;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -37,7 +41,7 @@ public class Inserimento implements Initializable {
     @FXML
     private Button inserisci;
     @FXML
-    private TextField farmaco;
+    private ComboBox<String> farmaco;
     @FXML
     private TextField sintomi;
     @FXML
@@ -48,38 +52,7 @@ public class Inserimento implements Initializable {
     DataModel model;
     private String matricola;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-
-        try {
-            model = DataModel.getInstance();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        //int orattuale = LocalTime.now().getHour();
-        SpinnerValueFactory<Integer> valueSBP
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 200, 0);
-        SBP.setValueFactory(valueSBP);
-        SpinnerValueFactory<Integer> valueDBP
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 130, 0);
-        DBP.setValueFactory(valueDBP);
-        SpinnerValueFactory<Integer> valueOra
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 12);
-        ora.setValueFactory(valueOra);
-        SpinnerValueFactory<Integer> valueDose
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 2000, 200, 5);
-        dose.setValueFactory(valueDose);
-
-        data.setDayCellFactory(getDayCellFactory());
-        data.setDayCellFactory(getDayCellFactory());
-        inserisci.setOnAction(this::insertData);
-
-        datanonvalida.setTextFill(Color.WHITE);
-        oranonvalida.setTextFill(Color.WHITE);
-    }
     private Callback<DatePicker, DateCell> getDayCellFactory() {
         return datePicker -> new DateCell() {
             @Override
@@ -100,8 +73,8 @@ public class Inserimento implements Initializable {
     void insertData(ActionEvent event) {
         datanonvalida.setTextFill(Color.WHITE);
         oranonvalida.setTextFill(Color.WHITE);
-        if (farmaco.getText().isEmpty()){
-            farmaco.setText("Nessuno");
+        if (farmaco.getValue() == null){ //
+            farmaco.setValue("Nessuno"); //
         }
         if (sintomi.getText().isEmpty()){
             sintomi.setText("Nessuno");
@@ -140,7 +113,7 @@ public class Inserimento implements Initializable {
                             boolean controllo = model.controlloinserimento(matricola, data.getValue(), ora.getValue());
                             if (controllo) {
                                 try {
-                                    model.insertData(matricola, data.getValue(), ora.getValue(), SBP.getValue(), DBP.getValue(), farmaco.getText(), dose.getValue(), sintomi.getText());
+                                    model.insertData(matricola, data.getValue(), ora.getValue(), SBP.getValue(), DBP.getValue(), farmaco.getValue(), dose.getValue(), sintomi.getText());
                                     System.out.println("Dati inseriti con successo nel database." + dose.getValue());
 
                                     SBP.getValueFactory().setValue(120); // Ripristina il valore predefinito
@@ -148,7 +121,7 @@ public class Inserimento implements Initializable {
                                     ora.getValueFactory().setValue(12);
                                     dose.getValueFactory().setValue(200);
                                     data.setValue(null);
-                                    farmaco.clear();
+                                    //farmaco.clear();
                                     sintomi.clear();
 
 
@@ -175,4 +148,102 @@ public class Inserimento implements Initializable {
             }
         }
     }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+
+        try {
+            model = DataModel.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        //int orattuale = LocalTime.now().getHour();
+        SpinnerValueFactory<Integer> valueSBP
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 200, 0);
+        SBP.setValueFactory(valueSBP);
+        SpinnerValueFactory<Integer> valueDBP
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 130, 0);
+        DBP.setValueFactory(valueDBP);
+        SpinnerValueFactory<Integer> valueOra
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 12);
+        ora.setValueFactory(valueOra);
+        SpinnerValueFactory<Integer> valueDose
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 2000, 200, 5);
+        dose.setValueFactory(valueDose);
+
+        data.setDayCellFactory(getDayCellFactory());
+        data.setDayCellFactory(getDayCellFactory());
+        inserisci.setOnAction(this::insertData);
+
+        datanonvalida.setTextFill(Color.WHITE);
+        oranonvalida.setTextFill(Color.WHITE);
+        ObservableList<String> farmaciOptions = FXCollections.observableArrayList(
+                "Acebutololo",
+                "Acido etacrinico",
+                "Amlodipina",
+                "Amiloride",
+                "Azilsartan",
+                "Benazepril",
+                "Bendroflumetiazide",
+                "Bumetanide",
+                "Candesartan",
+                "Captopril",
+                "Carvedilolo",
+                "Carvedilolo",
+                "Clonidina",
+                "Clonidina TTS (patch)",
+                "Diltiazem, a rilascio prolungato",
+                "Diltiazem, a rilascio prolungato",
+                "Doxazosina",
+                "Enalapril",
+                "Eprosartan",
+                "Eplerenone",
+                "Felodipina",
+                "Fosinopril",
+                "Furosemide",
+                "Guanabenz",
+                "Guanfacina",
+                "Idralazina",
+                "Irbesartan",
+                "Isradipina",
+                "Labetalolo",
+                "Lisinopril",
+                "Labetalolo",
+                "Losartan",
+                "Metildopa",
+                "Metoprololo",
+                "Metoprololo (a rilascio prolungato)",
+                "Minoxidil",
+                "Nadololo",
+                "Nebivololo",
+                "Nicardipina",
+                "Nicardipina, a rilascio prolungato",
+                "Nifedipina, a lento rilascio",
+                "Nisoldipina",
+                "Olmesartan",
+                "Pindololo",
+                "Prazosina",
+                "Perindopril erbumine",
+                "Penbutololo",
+                "Propranololo",
+                "Propranololo, lunga durata d'azione",
+                "Quinapril",
+                "Ramipril",
+                "Spironolattone",
+                "Telmisartan",
+                "Terazosina",
+                "Timololo",
+                "Torsemide",
+                "Trandolapril",
+                "Triamterene",
+                "Valsartan",
+                "Verapamil",
+                "Verapamil, a rilascio prolungato"
+        );
+        farmaco.setItems(farmaciOptions);
+
+    }
+
 }

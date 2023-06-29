@@ -1,8 +1,12 @@
 package com.code.demo3db;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -31,6 +35,11 @@ public class RiepilogoMedico implements Initializable {
     private TableColumn<TerapiaClass, Integer> colDose;
     @FXML
     private TableColumn<TerapiaClass, Integer> colAcquisizioni;
+    @FXML
+    private LineChart<String, Integer> grafico;
+    @FXML
+    private Button caricaRiepilogo;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,12 +51,14 @@ public class RiepilogoMedico implements Initializable {
         colAcquisizioni.setCellValueFactory(new PropertyValueFactory<>("acquisizioni"));
         mese.setOnAction(this::controlCheck);
         settimana.setOnAction(this::controlCheck);
+        settimana.setSelected(true);
+        initializeLineChart();
+
     }
 
     public void initializeData(String nomeUtente, String paziente) {
         matricola_M = nomeUtente;
         matricola_P = paziente;
-
         try {
             TherapyModel model = TherapyModel.getInstance();
             boolean isMeseSelected = mese.isSelected();
@@ -66,6 +77,32 @@ public class RiepilogoMedico implements Initializable {
             settimana.setSelected(false);
         }
     }
+    @FXML
+    private void initializeLineChart() {
+        XYChart.Series<String, Integer> sbpSeries = new XYChart.Series<>();
+        sbpSeries.setName("SBP");
 
+        XYChart.Series<String, Integer> dbpSeries = new XYChart.Series<>();
+        dbpSeries.setName("DBP");
+
+        try {
+            DataModel model = DataModel.getInstance();
+            ObservableList<Measurement> measurements = model.getMeasurements(matricola_P, settimana.isSelected());
+
+            for (Measurement measurement : measurements) {//è un for each che la v. mesurament prende il valore degli ogg mes. man mano che scorre
+                LocalDate date = measurement.getDate();
+                int sbp = measurement.getSbp();
+                int dbp = measurement.getDbp();
+
+                sbpSeries.getData().add(new XYChart.Data<>(date.toString(), sbp));
+                dbpSeries.getData().add(new XYChart.Data<>(date.toString(), dbp));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ObservableList<XYChart.Series<String, Integer>> seriesList = FXCollections.observableArrayList();
+        seriesList.addAll(sbpSeries, dbpSeries);
+        grafico.setData(seriesList);
+    }
 
 }

@@ -148,15 +148,16 @@ public class PazienteInterfaccia implements Initializable{
         Inserimento inserimentodati = loader.getController();
         inserimentodati.initializeData(nomeUtente);
     }
-    public void contatti(javafx.event.ActionEvent actionEvent) throws IOException{
+    public void contatti(javafx.event.ActionEvent actionEvent) throws IOException, SQLException {
+        String medico_associato;
+        Model model = Model.getInstance();
+        medico_associato = model.getMedicoAssociato(nomeUtente);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Contatti.fxml"));
         Parent fxml = loader.load();
         Contatti contatti = loader.getController();
-        contatti.initializeData(nomeUtente);
+        contatti.initializeData(nomeUtente,medico_associato);
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
-
-
     }
     public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Riepilogo.fxml"));

@@ -52,6 +52,8 @@ public class MedicoInterfaccia implements Initializable {
     @FXML
     private Button buttonFattori;
     @FXML
+    private Button buttonMessaggi;
+    @FXML
     private Label nome;
     @FXML
     private Label cognome;
@@ -91,6 +93,8 @@ public class MedicoInterfaccia implements Initializable {
         buttonRiepilogo.setOnMouseExited(e-> buttonRiepilogo.setStyle(DASHBOARD_STATICO));
         buttonFattori.setOnMouseEntered(e-> buttonFattori.setStyle(DASHBOARD_DINAMICO));
         buttonFattori.setOnMouseExited(e-> buttonFattori.setStyle(DASHBOARD_STATICO));
+        buttonMessaggi.setOnMouseEntered(e-> buttonMessaggi.setStyle(DASHBOARD_DINAMICO));
+        buttonMessaggi.setOnMouseExited(e-> buttonMessaggi.setStyle(DASHBOARD_STATICO));
 
     }
 
@@ -194,6 +198,31 @@ public class MedicoInterfaccia implements Initializable {
             scegli.selezionarePazienteAdatto();
         }
     }
+    public void messaggi(javafx.event.ActionEvent actionEvent) throws IOException, SQLException {
+        String medico_associato;
+        Model model = Model.getInstance();
+        medico_associato = model.getMedicoAssociato(matricola_P);
+
+        if(!matricola_P.isEmpty() && medico_associato.equals(this.nomeUtente)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Messaggi.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            Messaggi mex = loader.getController();
+            mex.initializeData(nomeUtente, matricola_P);
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            ScegliPaziente scegli = loader.getController();
+            scegli.setMedicoInterfacciaController(this);
+            scegli.initializeData(nomeUtente);
+            System.out.println("vvvvv" + nomeUtente);
+            scegli.selezionarePazienteAdatto();
+        }
+    }
     @FXML
     public void indietro(ActionEvent eventIndietro) throws IOException {
 
@@ -217,4 +246,6 @@ public class MedicoInterfaccia implements Initializable {
         matricola_P = matricolaSelezionata;
         System.out.println(matricola_P);
     }
+
+
 }

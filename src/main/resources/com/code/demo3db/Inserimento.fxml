@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
@@ -67,7 +68,6 @@
       <Spinner fx:id="DBP" layoutX="157.0" layoutY="150.0" prefHeight="25.0" prefWidth="83.0" />
       <Label layoutX="62.0" layoutY="129.0" prefHeight="17.0" prefWidth="32.0" text="SBP" />
       <Label layoutX="183.0" layoutY="129.0" prefHeight="17.0" prefWidth="32.0" text="DBP" />
-      <TextField fx:id="farmaco" layoutX="37.0" layoutY="313.0" prefHeight="25.0" prefWidth="289.0" />
       <TextField fx:id="sintomi" layoutX="37.0" layoutY="236.0" prefHeight="25.0" prefWidth="494.0" />
       <DatePicker fx:id="data" layoutX="35.0" layoutY="404.0" promptText="Inserisci la data" />
       <Spinner fx:id="ora" layoutX="37.0" layoutY="456.0" prefHeight="25.0" prefWidth="175.0" />
@@ -80,6 +80,7 @@
       </Button>
       <Label fx:id="datanonvalida" layoutX="240.0" layoutY="408.0" text="Inserisci una data valida" />
       <Label fx:id="oranonvalida" layoutX="240.0" layoutY="460.0" text="Inserisci una ora valida" />
+      <ComboBox fx:id="farmaco" layoutX="35.0" layoutY="312.0" prefHeight="25.0" prefWidth="289.0" />
     </children>
 
 

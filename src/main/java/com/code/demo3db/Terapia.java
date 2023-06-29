@@ -1,5 +1,7 @@
 package com.code.demo3db;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +21,7 @@ public class Terapia implements Initializable {
     @FXML
     private Button inserisci;
     @FXML
-    private TextField farmaco;
+    private ComboBox<String> farmaco;
     @FXML
     private Spinner<Integer> dose;
     @FXML
@@ -55,7 +57,70 @@ public class Terapia implements Initializable {
         data.setDayCellFactory(getDayCellFactory());
         data.setDayCellFactory(getDayCellFactory());
         inserisci.setOnAction(this::insertData);
-
+        ObservableList<String> farmaciOptions = FXCollections.observableArrayList(
+                "Acebutololo",
+                "Acido etacrinico",
+                "Amlodipina",
+                "Amiloride",
+                "Azilsartan",
+                "Benazepril",
+                "Bendroflumetiazide",
+                "Bumetanide",
+                "Candesartan",
+                "Captopril",
+                "Carvedilolo",
+                "Carvedilolo",
+                "Clonidina",
+                "Clonidina TTS (patch)",
+                "Diltiazem, a rilascio prolungato",
+                "Diltiazem, a rilascio prolungato",
+                "Doxazosina",
+                "Enalapril",
+                "Eprosartan",
+                "Eplerenone",
+                "Felodipina",
+                "Fosinopril",
+                "Furosemide",
+                "Guanabenz",
+                "Guanfacina",
+                "Idralazina",
+                "Irbesartan",
+                "Isradipina",
+                "Labetalolo",
+                "Lisinopril",
+                "Labetalolo",
+                "Losartan",
+                "Metildopa",
+                "Metoprololo",
+                "Metoprololo (a rilascio prolungato)",
+                "Minoxidil",
+                "Nadololo",
+                "Nebivololo",
+                "Nicardipina",
+                "Nicardipina, a rilascio prolungato",
+                "Nifedipina, a lento rilascio",
+                "Nisoldipina",
+                "Olmesartan",
+                "Pindololo",
+                "Prazosina",
+                "Perindopril erbumine",
+                "Penbutololo",
+                "Propranololo",
+                "Propranololo, lunga durata d'azione",
+                "Quinapril",
+                "Ramipril",
+                "Spironolattone",
+                "Telmisartan",
+                "Terazosina",
+                "Timololo",
+                "Torsemide",
+                "Trandolapril",
+                "Triamterene",
+                "Valsartan",
+                "Verapamil",
+                "Verapamil, a rilascio prolungato"
+        );
+        farmaco.setItems(farmaciOptions);
     }
     private Callback<DatePicker, DateCell> getDayCellFactory() {
         return datePicker -> new DateCell() {
@@ -72,7 +137,7 @@ public class Terapia implements Initializable {
     @FXML
     void insertData(ActionEvent event) {
         nonInserito.setText("");
-        String text = farmaco.getText();
+        String text = farmaco.getValue();
         if (data.getValue() != null && !text.isEmpty()) {
             LocalDate selectedDate = data.getValue();
 
@@ -80,7 +145,7 @@ public class Terapia implements Initializable {
 
                 try {
                     model = TherapyModel.getInstance();
-                    model.insertData(matricola_M, matricola_P, data.getValue(), farmaco.getText(), dose.getValue(), acquisizioni.getValue());
+                    model.insertData(matricola_M, matricola_P, data.getValue(), farmaco.getValue(), dose.getValue(), acquisizioni.getValue());
                     System.out.println("Data inserita con successo nel database.");
 
                     data.setValue(null); // Resetta il valore
@@ -96,8 +161,6 @@ public class Terapia implements Initializable {
             nonInserito.setText("Problema con l'inserimento, riprovare");
             nonInserito.setTextFill(Color.DARKRED);
         }
-        farmaco.clear();
-
     }
 
 

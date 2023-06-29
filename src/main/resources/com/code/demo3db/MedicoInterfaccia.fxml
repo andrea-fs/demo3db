@@ -46,6 +46,7 @@
                   <Button fx:id="buttonRiepilogo" mnemonicParsing="false" onAction="#riepilpgo" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: D3CCFFFF;" text="Riepilogo" />
                   <Button fx:id="buttonTerapia" mnemonicParsing="false" onAction="#terapia" prefHeight="50.0" prefWidth="162.0" style="-fx-background-color: D3CCFFFF;" text="Terapia" />
                   <Button fx:id="buttonFattori" mnemonicParsing="false" onAction="#fattori" prefHeight="50.0" prefWidth="162.0" style="-fx-background-color: D3CCFFFF;" text="Specifiche Paziente" />
+                  <Button fx:id="buttonMessaggi" mnemonicParsing="false" onAction="#messaggi" prefHeight="50.0" prefWidth="162.0" style="-fx-background-color: D3CCFFFF;" text="Messaggi e Alert" />
                </children>
             </VBox>
          </children>
