@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.MedicoInterfaccia">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.MedicoInterfaccia">
    <top>
       <Pane prefHeight="45.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
          <children>
@@ -42,8 +42,7 @@
          <children>
             <VBox layoutY="-1.0" prefHeight="274.0" prefWidth="163.0">
                <children>
-                  <Button fx:id="buttonPaziente" mnemonicParsing="false" onAction="#pazeinte" prefHeight="50.0" prefWidth="167.0" style="-fx-background-color: D3CCFFFF;" text="Paziente" />
-                  <Button fx:id="buttonRiepilogo" mnemonicParsing="false" onAction="#riepilpgo" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: D3CCFFFF;" text="Riepilogo" />
+                  <Button fx:id="buttonPaziente" mnemonicParsing="false" onAction="#paziente" prefHeight="50.0" prefWidth="167.0" style="-fx-background-color: D3CCFFFF;" text="Paziente" />
                   <Button fx:id="buttonTerapia" mnemonicParsing="false" onAction="#terapia" prefHeight="50.0" prefWidth="162.0" style="-fx-background-color: D3CCFFFF;" text="Terapia" />
                   <Button fx:id="buttonFattori" mnemonicParsing="false" onAction="#fattori" prefHeight="50.0" prefWidth="162.0" style="-fx-background-color: D3CCFFFF;" text="Specifiche Paziente" />
                   <Button fx:id="buttonMessaggi" mnemonicParsing="false" onAction="#messaggi" prefHeight="50.0" prefWidth="162.0" style="-fx-background-color: D3CCFFFF;" text="Messaggi e Alert" />
