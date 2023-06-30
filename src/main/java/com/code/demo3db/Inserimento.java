@@ -116,13 +116,43 @@ public class Inserimento implements Initializable {
                                     model.insertData(matricola, data.getValue(), ora.getValue(), SBP.getValue(), DBP.getValue(), farmaco.getValue(), dose.getValue(), sintomi.getText());
                                     System.out.println("Dati inseriti con successo nel database." + dose.getValue());
 
+
+                                    //farmaco.clear();
+                                    sintomi.clear();
+
+                                    Model orgmodel = Model.getInstance();
+                                    String medico_associato = orgmodel.getMedicoAssociato(matricola);
+
+                                    AlertModel alert = AlertModel.getInstance();
+
+                                    if((SBP.getValue() > 139 && SBP.getValue() < 150) && (DBP.getValue() > 89 && DBP.getValue() < 95)){
+                                        alert.insertAlert(matricola, medico_associato, "Grado 1 borderline", SBP.getValue(), DBP.getValue(), data.getValue());
+                                    }
+                                    else if((SBP.getValue() > 149 && SBP.getValue() < 160) && (DBP.getValue() > 94 && DBP.getValue() < 100)){
+                                        alert.insertAlert(matricola, medico_associato, "Grado 1 lieve", SBP.getValue(), DBP.getValue(), data.getValue());
+
+                                    }
+                                    else if((SBP.getValue() > 159 && SBP.getValue() < 180) && (DBP.getValue() > 99 && DBP.getValue() < 110)){
+                                        alert.insertAlert(matricola, medico_associato, "Grado 2 moderata", SBP.getValue(), DBP.getValue(), data.getValue());
+
+                                    }
+                                    else if((SBP.getValue() > 179) && (DBP.getValue() > 109)){
+                                        alert.insertAlert(matricola, medico_associato, "Grado 3 grave", SBP.getValue(), DBP.getValue(), data.getValue());
+
+                                    }
+                                    else if((SBP.getValue() > 139 && SBP.getValue() < 150) && (DBP.getValue() < 90)){
+                                        alert.insertAlert(matricola, medico_associato, "Sistolica isolata borderline", SBP.getValue(), DBP.getValue(), data.getValue());
+
+                                    }
+                                    else if((SBP.getValue() > 149) && (DBP.getValue() < 90)) {
+                                        alert.insertAlert(matricola, medico_associato, "Sistolica isolata", SBP.getValue(), DBP.getValue(), data.getValue());
+
+                                    }
                                     SBP.getValueFactory().setValue(120); // Ripristina il valore predefinito
                                     DBP.getValueFactory().setValue(80);
                                     ora.getValueFactory().setValue(12);
                                     dose.getValueFactory().setValue(200);
                                     data.setValue(null);
-                                    //farmaco.clear();
-                                    sintomi.clear();
 
 
                                 } catch (SQLException e) {

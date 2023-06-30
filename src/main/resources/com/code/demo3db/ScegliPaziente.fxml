@@ -32,5 +32,11 @@
          </font>
       </Label>
       <Label fx:id="scegliPazienteAdatto" layoutX="40.0" layoutY="48.0" text="Seleziona una un paziente adatto" textFill="#891d1d" />
+      <TableView fx:id="alertTable" layoutX="10.0" layoutY="263.0" prefHeight="200.0" prefWidth="231.0">
+        <columns>
+          <TableColumn fx:id="colonnaMatricolaAlert" prefWidth="113.59997749328613" text="C1" />
+          <TableColumn fx:id="colonnaCategoria" prefWidth="116.79998016357422" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </Pane>

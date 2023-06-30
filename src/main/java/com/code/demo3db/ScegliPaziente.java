@@ -5,9 +5,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,6 +22,12 @@ public class ScegliPaziente implements Initializable {
 
     @FXML
     private TableView<Paziente> tabella;
+    @FXML
+    private TableView<Alert> alertTable;
+    @FXML
+    private TableColumn<Alert, String> colonnaMatricolaAlert;
+    @FXML
+    private TableColumn<Alert, String> colonnaCategoria;
     @FXML
     private TableColumn<Paziente, String> colonnaMatricola;
     @FXML
@@ -37,9 +45,40 @@ public class ScegliPaziente implements Initializable {
         colonnaMatricola.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getMatricola()));
         colonnaNome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNome()));
         colonnaCognome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCognome()));
+        colonnaMatricolaAlert.setCellValueFactory(data -> data.getValue().matricolaProperty());
+        colonnaCategoria.setCellValueFactory(data -> data.getValue().categoriaProperty());
+        // distingui la grave
+        colonnaCategoria.setCellFactory(new Callback<TableColumn<Alert, String>, TableCell<Alert, String>>() {
+            @Override
+            public TableCell<Alert, String> call(TableColumn<Alert, String> column) {
+                return new TableCell<Alert, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item != null && !empty) {
+                            setText(item);
+
+                            if (item.equals("Grado 3 grave") || item.equals("Sistolica isolata")) {
+                                setTextFill(Color.RED);
+                            } else {
+                                setTextFill(Color.BLACK);
+                            }
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+
         caricaPazienti();
+        caricaAlert();
+
         selezionato.setText("clicca nella tabella un paziente");
         scegliPazienteAdatto.setText("");
+
+
     }
     public void initializeData(String matricola) {
         this.matricola = matricola;
@@ -66,6 +105,18 @@ public class ScegliPaziente implements Initializable {
             e.printStackTrace();
         }
     }
+    private void caricaAlert() {
+        try {
+            AlertModel model = AlertModel.getInstance();
+            List<Alert> alerts = model.getAlertsByCategory();
+
+            alertTable.getItems().clear();
+            alertTable.getItems().addAll(alerts);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setMedicoInterfacciaController(MedicoInterfaccia controller) {
         this.medicoInterfacciaController = controller;
     }
