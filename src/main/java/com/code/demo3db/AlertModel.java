@@ -98,8 +98,10 @@ public class AlertModel {
     }
     public List<Alert> getAlertsByCategory(String medicoMatricola) throws SQLException {
         List<Alert> alerts = new ArrayList<>();
+        LocalDate unaSettimanaFa = LocalDate.now().minusWeeks(1);
 
-        String query = "SELECT * FROM alert WHERE medico = '" + medicoMatricola + "' AND categoria IN ('Grado 3 grave', 'Grado 2 moderata', 'Sistolica isolata')";
+
+        String query = "SELECT * FROM alert WHERE medico = '" + medicoMatricola + "' AND data > '" + unaSettimanaFa + "'"; //AND categoria IN ('Grado 3 grave', 'Grado 2 moderata', 'Sistolica isolata')
         ResultSet resultSet = runQuery(query);
         System.out.println(medicoMatricola + "matricola passata");
 
@@ -112,7 +114,5 @@ public class AlertModel {
 
         return alerts;
     }
-
-
 
 }

@@ -61,7 +61,7 @@
         </Label>
       <Label layoutX="208.0" layoutY="50.0" text="Inserisci qui i tuoi dati giornalieri" />
       <Label layoutX="284.0" layoutY="167.0" text="Pressione sistolica (SBP) e pressione diastolica (DBP)" />
-      <Label layoutX="37.0" layoutY="215.0" text="Sintomi" />
+      <Label layoutX="37.0" layoutY="215.0" text="Sintomi o eventuali malattie concomitanti" />
       <Label layoutX="37.0" layoutY="292.0" text="Farmaco e dose" />
       <Label layoutX="37.0" layoutY="378.0" text="Data" />
       <Spinner fx:id="SBP" layoutX="37.0" layoutY="150.0" prefHeight="25.0" prefWidth="83.0" />

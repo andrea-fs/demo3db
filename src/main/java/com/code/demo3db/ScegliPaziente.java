@@ -39,6 +39,8 @@ public class ScegliPaziente implements Initializable {
     private Label selezionato;
     @FXML
     private Label scegliPazienteAdatto;
+    @FXML
+    private Label alertTreGiorni;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabella.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -48,6 +50,17 @@ public class ScegliPaziente implements Initializable {
         colonnaMatricolaAlert.setCellValueFactory(data -> data.getValue().matricolaProperty());
         colonnaCategoria.setCellValueFactory(data -> data.getValue().categoriaProperty());
         // distingui la grave
+        /*
+        try {
+            DataModel m = DataModel.getInstance();
+            if(m.checkTreGiorni()){
+                alertTreGiorni.setText("Attenzione! sono 3 giorni che non inserisci dati!");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+         */
         colonnaCategoria.setCellFactory(new Callback<TableColumn<Alert, String>, TableCell<Alert, String>>() {
             @Override
             public TableCell<Alert, String> call(TableColumn<Alert, String> column) {
@@ -59,9 +72,13 @@ public class ScegliPaziente implements Initializable {
                         if (item != null && !empty) {
                             setText(item);
 
-                            if (item.equals("Grado 3 grave") || item.equals("Sistolica isolata")) {
+                            if (item.equals("Grado 3 grave") || item.equals("Sistolica isolata") || item.equals("Farmaco esterno a terapie")) {
                                 setTextFill(Color.RED);
-                            } else {
+                            }
+                            else if(item.equals("Dose errata") ||  item.equals("Sintomi o malattie")){
+                                setTextFill(Color.ORANGE);
+                            }
+                            else {
                                 setTextFill(Color.BLACK);
                             }
                         } else {
@@ -70,7 +87,9 @@ public class ScegliPaziente implements Initializable {
                     }
                 };
             }
+
         });
+
 
         caricaPazienti();
 

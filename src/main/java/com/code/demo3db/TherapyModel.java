@@ -1,5 +1,7 @@
 package com.code.demo3db;
 
+import javafx.util.Pair;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.List;
 public class TherapyModel {
 
 
-
+//TODO max 4 terapie
     private Connection conn;
     private static com.code.demo3db.TherapyModel dataTherapyInstance = null;
     public void log(Object o){
@@ -149,6 +151,23 @@ public class TherapyModel {
         }
 
         return terapie;
+    }
+    public List<Pair<String, Integer>> getFarmaciTerapieAttive(String matricolaP) throws SQLException {
+        List<Pair<String, Integer>> farmaci = new ArrayList<>();
+
+        LocalDate today = LocalDate.now();
+
+        String query = "SELECT farmaco, dose FROM therapy WHERE matricola_P = '" + matricolaP + "' AND data_fine > '" + today + "'";
+        ResultSet rs = runQuery(query);
+
+        while (rs.next()) {
+            String farmaco = rs.getString("farmaco");
+            int dose = rs.getInt("dose");
+            Pair<String, Integer> farmacoDose = new Pair<>(farmaco, dose);
+            farmaci.add(farmacoDose);
+        }
+
+        return farmaci;
     }
 
 }

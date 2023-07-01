@@ -76,7 +76,7 @@ public class DataModel {
                 "farmaco TEXT, " +
                 "dose INTEGER, " +
                 "sintomi TEXT, " +
-                "PRIMARY KEY (matricola, data, ora)" +
+                "PRIMARY KEY (matricola, data, ora, farmaco)" +
                 ")";
 
         log(s);
@@ -102,7 +102,7 @@ public class DataModel {
         // Esegui l'istruzione di inserimento
         runStatement(insertQuery);
     }
-
+/*
     public boolean controlloinserimento (String matricola,  LocalDate date, int time) throws SQLException{
         String q = "SELECT * FROM dati WHERE matricola = '" + matricola + "' AND data = '" + date + "' AND ora = '" + time + "'"; //TODO se hai tempo inserimento parm x sicurezza
         log(q);
@@ -116,6 +116,28 @@ public class DataModel {
         else{
             System.out.println("non va bene");
             return false;
+        }
+    }*/
+    public boolean controlloinserimento(String matricola, LocalDate date, int time, String farmaco) throws SQLException {
+        String query = "SELECT * FROM dati WHERE matricola = ? AND data = ? AND ora = ? AND farmaco = ?";
+        log(query);
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, matricola);
+            statement.setDate(2, java.sql.Date.valueOf(date));
+            statement.setInt(3, time);
+            statement.setString(4, farmaco);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                boolean esiste = rs.next();
+                if (!esiste) {
+                    System.out.println("Va bene");
+                    return true;
+                } else {
+                    System.out.println("non va bene");
+                    return false;
+                }
+            }
         }
     }
     public int countAcquisizioni(String farmaco, LocalDate data) throws SQLException {
@@ -157,5 +179,16 @@ public class DataModel {
         }
 
         return measurements;
+    }
+    public boolean checkTreGiorni(String matricola) throws SQLException {
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(2); // Data di inizio dei 3 giorni precedenti
+
+        String query = "SELECT * FROM dati WHERE matricola = '" + matricola + "'AND data >= '" + startDate + "' AND data <= '" + today + "'";
+        ResultSet rs = runQuery(query);
+        boolean hasInsertions = rs.next();
+
+        return hasInsertions;
+
     }
 }

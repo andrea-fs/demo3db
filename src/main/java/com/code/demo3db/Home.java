@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 public class Home implements Initializable {
 
     @FXML
+    private Label alertTreGiorni;
+    @FXML
     private Label terapia1;
     @FXML
     private Label terapia2;
@@ -74,11 +76,20 @@ public class Home implements Initializable {
         quantiTerapia3.setText(null);
         quantiTerapia4.setText(null);
         cerchio.setFill(Color.DARKRED);
+        alertTreGiorni.setText("");
     }
     public void initializeData(String nomeUtente) {
         matricola = nomeUtente;
-        System.out.println( matricola + "initializeData");
         //carica();
+        try {
+            if(!datamodel.checkTreGiorni(matricola)){
+                alertTreGiorni.setText("Attenzione! sono 3 giorni che non inserisci dati!");
+                alertTreGiorni.setTextFill(Color.DARKRED);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     private void carica(){
@@ -89,7 +100,6 @@ public class Home implements Initializable {
 
         try {
             List<TerapiaClass> terapie = model.getTerapieByMatricola(matricola);
-            System.out.println(matricola + "carica");
 
             if (terapie.size() >= 1) {
                 TerapiaClass terapia1 = terapie.get(0);
@@ -103,7 +113,6 @@ public class Home implements Initializable {
                 setTerapiaLabel(this.terapia2, terapia2);
                 farmacoT2 = terapia2.getFarmaco();
                 daFareT2 = terapia2.getAcquisizioni();
-
 
             }
 
@@ -130,7 +139,6 @@ public class Home implements Initializable {
 
 
         try {
-            System.out.println("aaa" + farmacoT1 + LocalDate.now());
             acquisizioniTerapia1 = datamodel.countAcquisizioni(farmacoT1, LocalDate.now());
             if (acquisizioniTerapia1 != 0) {
                 quantiTerapia1.setText("Fatte: " + acquisizioniTerapia1 + "/" + daFareT1);
@@ -147,6 +155,8 @@ public class Home implements Initializable {
             if (acquisizioniTerapia4 != 0) {
                 quantiTerapia4.setText("Fatte: " + acquisizioniTerapia4 + "/" + daFareT4);
             }
+            //System.out.println("we"+                  acquisizioniTerapia1 + acquisizioniTerapia2 + acquisizioniTerapia3 + acquisizioniTerapia4
+            //+ farmacoT1+ daFareT1 + farmacoT2 + farmacoT3 + farmacoT4);
         } catch (SQLException e) {
             e.printStackTrace();
         }
