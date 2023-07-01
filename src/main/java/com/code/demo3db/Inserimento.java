@@ -67,11 +67,10 @@ public class Inserimento implements Initializable {
     public void initializeData(String nomeUtente){
         matricola = nomeUtente;
         System.out.println(matricola);
-        data.setConverter(createStringConverter());
     }
     private StringConverter<LocalDate> createStringConverter () {
         return new StringConverter<>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             @Override
             public String toString(LocalDate date) {
                 if (date != null) {
@@ -84,7 +83,7 @@ public class Inserimento implements Initializable {
             public LocalDate fromString(String s) {
                 if (s != null && !s.isEmpty()) {
                     try {
-                        if (s.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                        if (s.matches("\\d{4}-\\d{2}-\\d{2}")) {
                             return LocalDate.parse(s, dateFormatter);
                         } else {
                             return null;
@@ -99,11 +98,13 @@ public class Inserimento implements Initializable {
             }
         };
     }
+    /*
     @FXML
     void insertData(ActionEvent event) {
-
         datanonvalida.setTextFill(Color.WHITE);
         oranonvalida.setTextFill(Color.WHITE);
+
+
         if (farmaco.getValue() == null){ //
             farmaco.setValue("Nessuno"); //
         }
@@ -207,9 +208,94 @@ public class Inserimento implements Initializable {
             }
         }
     }
+
+     */
+
+
+
+    @FXML
+    public void insertData(ActionEvent event) {
+        datanonvalida.setTextFill(Color.WHITE);
+        oranonvalida.setTextFill(Color.WHITE);
+
+        if (farmaco.getValue() == null) {
+            farmaco.setValue("Nessuno");
+        }
+
+        if (sintomi.getText().isEmpty()) {
+            sintomi.setText("Nessuno");
+        }
+
+        if (data.getValue() == null) {
+            datanonvalida.setTextFill(Color.RED);
+            return;
+        }
+
+        LocalDate selectedDate = data.getValue();
+
+        if (selectedDate.isEqual(LocalDate.now()) && ora.getValue().compareTo(LocalTime.now().getHour()) >= 0) {
+            oranonvalida.setTextFill(Color.RED);
+            return;
+        }
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dateText = selectedDate.format(formatter);
+
+            if (selectedDate.isBefore(LocalDate.of(1950, 1, 1))) {
+                datanonvalida.setTextFill(Color.RED);
+                return;
+            }
+
+            model = DataModel.getInstance();
+            boolean controllo = model.controlloinserimento(matricola, data.getValue(), ora.getValue());
+
+            if (controllo) {
+                try {
+                    model.insertData(matricola, data.getValue(), ora.getValue(), SBP.getValue(), DBP.getValue(), farmaco.getValue(), dose.getValue(), sintomi.getText());
+                    System.out.println("Dati inseriti con successo nel database." + dose.getValue());
+
+                    sintomi.clear();
+
+                    Model orgmodel = Model.getInstance();
+                    String medico_associato = orgmodel.getMedicoAssociato(matricola);
+
+                    AlertModel alert = AlertModel.getInstance();
+
+                    if ((SBP.getValue() > 139 && SBP.getValue() < 150) && (DBP.getValue() > 89 && DBP.getValue() < 95)) {
+                        alert.insertAlert(matricola, medico_associato, "Grado 1 borderline", SBP.getValue(), DBP.getValue(), data.getValue());
+                    } else if ((SBP.getValue() > 149 && SBP.getValue() < 160) && (DBP.getValue() > 94 && DBP.getValue() < 100)) {
+                        alert.insertAlert(matricola, medico_associato, "Grado 1 lieve", SBP.getValue(), DBP.getValue(), data.getValue());
+                    } else if ((SBP.getValue() > 159 && SBP.getValue() < 180) && (DBP.getValue() > 99 && DBP.getValue() < 110)) {
+                        alert.insertAlert(matricola, medico_associato, "Grado 2 moderata", SBP.getValue(), DBP.getValue(), data.getValue());
+                    } else if ((SBP.getValue() > 179) && (DBP.getValue() > 109)) {
+                        alert.insertAlert(matricola, medico_associato, "Grado 3 grave", SBP.getValue(), DBP.getValue(), data.getValue());
+                    } else if ((SBP.getValue() > 139 && SBP.getValue() < 150) && (DBP.getValue() < 90)) {
+                        alert.insertAlert(matricola, medico_associato, "Sistolica isolata borderline", SBP.getValue(), DBP.getValue(), data.getValue());
+                    } else if ((SBP.getValue() > 149) && (DBP.getValue() < 90)) {
+                        alert.insertAlert(matricola, medico_associato, "Sistolica isolata", SBP.getValue(), DBP.getValue(), data.getValue());
+                    }
+
+                    SBP.getValueFactory().setValue(120);
+                    DBP.getValueFactory().setValue(80);
+                    ora.getValueFactory().setValue(12);
+                    dose.getValueFactory().setValue(200);
+                    data.setValue(null);
+                } catch (SQLException e) {
+                    System.out.println("Errore durante l'inserimento dei dati nel database: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Inserimento non valido");
+            }
+        } catch (DateTimeParseException | SQLException e) {
+            datanonvalida.setTextFill(Color.RED);
+            System.out.println("Errore durante il parsing della data: " + e.getMessage());
+        }
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
 
         try {
             model = DataModel.getInstance();
@@ -236,6 +322,9 @@ public class Inserimento implements Initializable {
         data.setDayCellFactory(getDayCellFactory());
         inserisci.setOnAction(this::insertData);
 
+        if(data.getConverter() == null){
+            data.setConverter(createStringConverter());
+        }
         datanonvalida.setTextFill(Color.WHITE);
         oranonvalida.setTextFill(Color.WHITE);
         ObservableList<String> farmaciOptions = FXCollections.observableArrayList(
@@ -302,6 +391,7 @@ public class Inserimento implements Initializable {
                 "Verapamil, a rilascio prolungato"
         );
         farmaco.setItems(farmaciOptions);
+
 
     }
 

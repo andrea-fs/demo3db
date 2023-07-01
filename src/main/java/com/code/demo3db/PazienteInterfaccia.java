@@ -82,12 +82,12 @@ public class PazienteInterfaccia implements Initializable{
         //mainPane.setMinSize(500, 200);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Benvenuto.fxml"));
             Parent fxml = loader.load();
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
-            Home home = loader.getController();
-            home.initializeData(nomeUtente);
+            System.out.println("vvvvv" + nomeUtente);
+
         } catch (IOException e){
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
         }

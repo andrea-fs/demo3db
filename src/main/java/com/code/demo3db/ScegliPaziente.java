@@ -73,7 +73,6 @@ public class ScegliPaziente implements Initializable {
         });
 
         caricaPazienti();
-        caricaAlert();
 
         selezionato.setText("clicca nella tabella un paziente");
         scegliPazienteAdatto.setText("");
@@ -82,7 +81,11 @@ public class ScegliPaziente implements Initializable {
     }
     public void initializeData(String matricola) {
         this.matricola = matricola;
+        System.out.println("             "+matricola);
         //caricaPazienti();
+        caricaAlert(matricola);
+
+
     }
     private void caricaPazienti() {
 
@@ -105,13 +108,13 @@ public class ScegliPaziente implements Initializable {
             e.printStackTrace();
         }
     }
-    private void caricaAlert() {
+    private void caricaAlert(String matricola) {
         try {
             AlertModel model = AlertModel.getInstance();
-            List<Alert> alerts = model.getAlertsByCategory();
+            List<Alert> alert = model.getAlertsByCategory(matricola);
 
             alertTable.getItems().clear();
-            alertTable.getItems().addAll(alerts);
+            alertTable.getItems().addAll(alert);
         } catch (SQLException e) {
             e.printStackTrace();
         }

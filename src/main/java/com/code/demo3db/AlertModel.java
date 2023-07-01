@@ -96,11 +96,12 @@ public class AlertModel {
         log(q);
         runStatement(q);
     }
-    public List<Alert> getAlertsByCategory() throws SQLException {
+    public List<Alert> getAlertsByCategory(String medicoMatricola) throws SQLException {
         List<Alert> alerts = new ArrayList<>();
 
-        String query = "SELECT * FROM alert WHERE categoria IN ('Grado 3 grave', 'Grado 2 moderata', 'Sistolica isolata')";
+        String query = "SELECT * FROM alert WHERE medico = '" + medicoMatricola + "' AND categoria IN ('Grado 3 grave', 'Grado 2 moderata', 'Sistolica isolata')";
         ResultSet resultSet = runQuery(query);
+        System.out.println(medicoMatricola + "matricola passata");
 
         while (resultSet.next()) {
             String matricola = resultSet.getString("paziente");
@@ -111,4 +112,7 @@ public class AlertModel {
 
         return alerts;
     }
+
+
+
 }

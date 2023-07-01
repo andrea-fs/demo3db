@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="514.0" prefWidth="587.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Benvenuto">
+   <children>
+      <Circle fill="#4c6984" layoutX="123.0" layoutY="149.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#589466" layoutX="180.0" layoutY="221.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#bc669b" layoutX="312.0" layoutY="140.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#dfc13a" layoutX="443.0" layoutY="221.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#faf0c9" layoutX="142.0" layoutY="372.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#36b0b9" layoutX="473.0" layoutY="392.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#9ed1b5" layoutX="312.0" layoutY="321.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#ba7066" layoutX="443.0" layoutY="114.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#5c64d7" layoutX="265.0" layoutY="392.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="14.0" layoutY="96.0" />
+      <Label layoutX="87.0" layoutY="231.0" prefHeight="54.0" prefWidth="463.0" style="-fx-background-color: #2c3e50;" text="Benvenuto, hai effettuato l'accesso al portale" textFill="#c9c5c5">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

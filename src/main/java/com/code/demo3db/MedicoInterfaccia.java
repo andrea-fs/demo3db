@@ -69,7 +69,7 @@ public class MedicoInterfaccia implements Initializable {
         indietro.setStyle(COLORE_STATICO);
         indietro.setOnMouseEntered(e-> indietro.setStyle(COLORE_DINAMICO));
         indietro.setOnMouseExited(e-> indietro.setStyle(COLORE_STATICO));
-
+/*
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
             Parent fxml = loader.load();
@@ -83,6 +83,20 @@ public class MedicoInterfaccia implements Initializable {
         } catch (IOException e){
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
         }
+
+ */
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Benvenuto.fxml"));
+            Parent fxml = loader.load();
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            System.out.println("vvvvv" + nomeUtente);
+
+        } catch (IOException e){
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+
         indietro.setOnMouseEntered(e-> indietro.setStyle(COLORE_DINAMICO));
         indietro.setOnMouseExited(e-> indietro.setStyle(COLORE_STATICO));
 
