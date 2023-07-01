@@ -64,13 +64,44 @@ public class Inserimento implements Initializable {
             }
         };
     }
-    // TODO LA DATA PUò ESSERE INSERITO DI TUTTO E DARE ERRORE
     public void initializeData(String nomeUtente){
         matricola = nomeUtente;
         System.out.println(matricola);
+        data.setConverter(createStringConverter());
+    }
+    private StringConverter<LocalDate> createStringConverter () {
+        return new StringConverter<>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+            @Override
+            public LocalDate fromString(String s) {
+                if (s != null && !s.isEmpty()) {
+                    try {
+                        if (s.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                            return LocalDate.parse(s, dateFormatter);
+                        } else {
+                            return null;
+                        }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Errore nella data " + e.getMessage());
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+            }
+        };
     }
     @FXML
     void insertData(ActionEvent event) {
+
         datanonvalida.setTextFill(Color.WHITE);
         oranonvalida.setTextFill(Color.WHITE);
         if (farmaco.getValue() == null){ //
@@ -79,8 +110,6 @@ public class Inserimento implements Initializable {
         if (sintomi.getText().isEmpty()){
             sintomi.setText("Nessuno");
         }// TODO lettere nella data controlla
-
-
         if(data.getValue() == null){
             datanonvalida.setTextFill(Color.RED);
         }
