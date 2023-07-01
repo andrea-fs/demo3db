@@ -2,10 +2,19 @@ package com.code.demo3db;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -51,6 +60,8 @@ public class FattoriDiRischio implements Initializable {
     private Label ultimoComorbidita;
     @FXML
     private Label ultimoAltro;
+    @FXML
+    private Button misurButton;
 
     DatiPazienteModel model;
     public void initializeData(String nomeUtente, String paziente) {
@@ -115,6 +126,33 @@ public class FattoriDiRischio implements Initializable {
         coomorbidita.clear();
         patologie.clear();
         altro.clear();
+    }
+
+    /*public void backRiepilogo (ActionEvent event) {
+
+        //TODO Quando chiudi con indietro ha senso salvare?
+        inserRaw();
+
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+     */
+
+    public void goToRiepilogo (ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RiepilogoMedico.fxml"));
+        Parent fxml = loader.load();
+        RiepilogoMedico riepilogoMedico = loader.getController();
+        riepilogoMedico.initializeData(matricola_M, matricola_P);
+        Image icon = new Image(getClass().getResourceAsStream("/icona.png"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(fxml));
+        stage.getIcons().add(icon);
+        stage.show();
+        stage.setTitle("Fattori di Rischio");
+
     }
 
 }

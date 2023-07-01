@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.RiepilogoMedico">
+<Pane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.RiepilogoMedico">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3ccff" height="53.0" layoutX="193.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
         <Label layoutX="212.0" layoutY="14.0" text="Riepilogo" textFill="#0c1b1b">
@@ -39,5 +39,6 @@
         </yAxis>
       </LineChart>
       <Button fx:id="caricaRiepilogo" layoutX="14.0" layoutY="67.0" mnemonicParsing="false" onAction="#initializeLineChart" prefHeight="7.0" prefWidth="51.0" style="-fx-background-color: #d3ccff;" text="carica" />
+      <Button fx:id="closeButton" layoutX="521.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeStage" text="Indietro" />
     </children>
 </Pane>

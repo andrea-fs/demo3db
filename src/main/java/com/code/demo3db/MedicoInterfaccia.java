@@ -1,6 +1,5 @@
 package com.code.demo3db;
 
-import javafx.beans.binding.DoubleBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +11,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,8 +90,8 @@ public class MedicoInterfaccia implements Initializable {
         buttonPaziente.setOnMouseExited(e-> buttonPaziente.setStyle(DASHBOARD_STATICO));
         buttonTerapia.setOnMouseEntered(e-> buttonTerapia.setStyle(DASHBOARD_DINAMICO));
         buttonTerapia.setOnMouseExited(e-> buttonTerapia.setStyle(DASHBOARD_STATICO));
-        buttonRiepilogo.setOnMouseEntered(e-> buttonRiepilogo.setStyle(DASHBOARD_DINAMICO));
-        buttonRiepilogo.setOnMouseExited(e-> buttonRiepilogo.setStyle(DASHBOARD_STATICO));
+        //buttonRiepilogo.setOnMouseEntered(e-> buttonRiepilogo.setStyle(DASHBOARD_DINAMICO));
+        //buttonRiepilogo.setOnMouseExited(e-> buttonRiepilogo.setStyle(DASHBOARD_STATICO));
         buttonFattori.setOnMouseEntered(e-> buttonFattori.setStyle(DASHBOARD_DINAMICO));
         buttonFattori.setOnMouseExited(e-> buttonFattori.setStyle(DASHBOARD_STATICO));
         buttonMessaggi.setOnMouseEntered(e-> buttonMessaggi.setStyle(DASHBOARD_DINAMICO));
@@ -121,7 +122,7 @@ public class MedicoInterfaccia implements Initializable {
             cognome.setText("");
         }
     }
-    public void pazeinte(javafx.event.ActionEvent actionEvent) throws IOException{
+    public void paziente(javafx.event.ActionEvent actionEvent) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ScegliPaziente.fxml"));
         Parent fxml = loader.load();
         contentArea.getChildren().removeAll();
@@ -156,7 +157,7 @@ public class MedicoInterfaccia implements Initializable {
             scegli.selezionarePazienteAdatto();
         }
     }
-    public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
+    /*public void riepilogo(javafx.event.ActionEvent actionEvent) throws IOException{
         if(!matricola_P.isEmpty()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RiepilogoMedico.fxml"));
             Parent fxml = loader.load();
@@ -177,7 +178,8 @@ public class MedicoInterfaccia implements Initializable {
             scegli.selezionarePazienteAdatto();
         }
     }
-    public void fattori(javafx.event.ActionEvent actionEvent) throws IOException{
+     */
+     public void fattori(javafx.event.ActionEvent actionEvent) throws IOException{
         if(!matricola_P.isEmpty()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FattoriDiRischio.fxml"));
             Parent fxml = loader.load();
@@ -222,23 +224,47 @@ public class MedicoInterfaccia implements Initializable {
             System.out.println("vvvvv" + nomeUtente);
             scegli.selezionarePazienteAdatto();
         }
-    }
+     }
     @FXML
-    public void indietro(ActionEvent eventIndietro) throws IOException {
+    public void indietro(ActionEvent eventIndietro) {
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("Stai per chiudere l'applicazione");
-        alert.setContentText("Vuoi davvero uscire? ");
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Logout");
+            alert.setHeaderText("Stai per effettuare il logout\nLe informazioni non salvate andranno perse!");
+            alert.setContentText("Vuoi davvero uscire? ");
 
-        if (alert.showAndWait().get() == ButtonType.OK) {
+            if (alert.showAndWait().get() == ButtonType.OK) {
 
-            Parent root = FXMLLoader.load(getClass().getResource("Password.fxml"));
+                List<Window> windows = new ArrayList<>(Window.getWindows());
+                List<Stage> closing = new ArrayList<>();
 
-            stage = (Stage) ((Node) eventIndietro.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+                if (windows.size() > 1) {
+                    Iterator <Window> iterator = windows.iterator();
+                    while (iterator.hasNext()){
+                        Window window = iterator.next();
+                        Stage opened = (Stage) window;
+                        if (opened.getTitle().equals("Fattori di Rischio")) {
+                            closing.add(opened);
+                            iterator.remove();
+                        }
+                    }
+                }
+
+                for (Stage chiudo : closing) {
+                    chiudo.close();
+                }
+
+                    Parent root = FXMLLoader.load(getClass().getResource("Password.fxml"));
+
+                    stage = (Stage) ((Node) eventIndietro.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

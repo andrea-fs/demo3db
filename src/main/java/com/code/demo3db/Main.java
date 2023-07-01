@@ -2,6 +2,7 @@ package com.code.demo3db;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Group;
@@ -52,17 +53,17 @@ public class Main extends Application{   //TODO mettere vincoli su lunghezze x e
         //db.insert_raw("archivio","P2","bo","Gio","Se","P");
         launch();
     }
-
     public void indietro (Stage stage) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
-        alert.setHeaderText("Stai per chiudere l'applicazione");
+        alert.setHeaderText("Stai per chiudere l'applicazione\nTutti i dati non salvati andranno persi!");
         alert.setContentText("Termino applicazione?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
 
             stage.close();
+            Platform.exit();
         }
     }
 }

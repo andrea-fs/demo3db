@@ -7,8 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.FattoriDiRischio">
+<AnchorPane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.FattoriDiRischio">
    <children>
       <TextField fx:id="fattoriDiRischio" layoutX="14.0" layoutY="176.0" />
       <TextField fx:id="patologie" layoutX="218.0" layoutY="176.0" />
@@ -40,5 +39,6 @@
       <Label layoutX="13.0" layoutY="45.0" text="Patologie pregresse:" />
       <Label layoutX="13.0" layoutY="76.0" text="Comorbidità:" />
       <Label layoutX="13.0" layoutY="106.0" text="Altro:" />
+      <Button fx:id="misurButton" layoutX="427.0" layoutY="11.0" mnemonicParsing="false" onAction="#goToRiepilogo" prefHeight="25.0" prefWidth="138.0" text="Riepilogo Misurazioni" />
    </children>
 </AnchorPane>
