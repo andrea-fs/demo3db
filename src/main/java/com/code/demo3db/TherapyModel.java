@@ -126,17 +126,16 @@ public class TherapyModel {
 
         LocalDate currentDate = LocalDate.now();
 
-        LocalDate maxDate;
+        LocalDate minDate;
         if (isMeseSelected) { //
-            maxDate = currentDate.plusMonths(1);
+            minDate = currentDate.minusMonths(1);
         } else {
-            maxDate = currentDate.plusWeeks(1);
+            minDate = currentDate.minusWeeks(1);
         }
 
         String query = "SELECT data_fine, farmaco, dose, acquisizioni FROM therapy " +
                 "WHERE matricola_P = '" + matricola + "' " +
-                "AND data_fine > '" + currentDate + "' " +
-                "AND data_fine <= '" + maxDate + "'";
+                "AND data_fine >= '" + minDate + "'";
 
         ResultSet rs = runQuery(query);
 
@@ -168,6 +167,14 @@ public class TherapyModel {
         }
 
         return farmaci;
+    }
+    public void eliminaTerapia(TerapiaClass terapia,String matricola) throws SQLException {
+        String deleteQuery = "DELETE FROM therapy WHERE matricola_P = ? AND data_fine = ? AND farmaco = ?";
+        PreparedStatement ps = conn.prepareStatement(deleteQuery);
+        ps.setString(1, matricola);
+        ps.setDate(2, java.sql.Date.valueOf(terapia.getDataFine()));
+        ps.setString(3, terapia.getFarmaco());
+        ps.executeUpdate();
     }
 
 }

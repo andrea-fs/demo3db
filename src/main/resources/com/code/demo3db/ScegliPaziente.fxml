@@ -21,7 +21,7 @@
          </font>
       </Label>
       <Label layoutX="12.0" layoutY="31.0" />
-      <Label fx:id="selezionato" layoutX="48.0" layoutY="169.0" text="clicca nella tabella un paziente">
+      <Label fx:id="selezionato" layoutX="48.0" layoutY="169.0" text="clicca nella tabella un paziente ➮">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>

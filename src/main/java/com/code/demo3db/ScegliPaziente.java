@@ -4,10 +4,7 @@ import com.code.demo3db.Paziente;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
@@ -89,6 +86,30 @@ public class ScegliPaziente implements Initializable {
             }
 
         });
+        tabella.setRowFactory(tv -> new TableRow<Paziente>() {
+            @Override
+            protected void updateItem(Paziente paziente, boolean empty) {
+                super.updateItem(paziente, empty);
+                Model model = null;
+                try {
+                    model = Model.getInstance();
+
+                if (paziente != null && !empty) {
+                    String medicoAssociato = model.getMedicoAssociato(paziente.getMatricola());
+
+                    if (medicoAssociato != null && medicoAssociato.equals(matricola)) {
+                        setStyle("-fx-background-color: #d3ccff;");
+                    } else {
+                        setStyle("");
+                    }
+                } else {
+                    setStyle("");
+                }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
 
         caricaPazienti();
@@ -119,7 +140,7 @@ public class ScegliPaziente implements Initializable {
                     if (pazienteSelezionato != null) {
                         String matricolaSelezionata = pazienteSelezionato.getMatricola();
                         medicoInterfacciaController.setMatricola_P(matricolaSelezionata);
-                        selezionato.setText(matricolaSelezionata);
+                        selezionato.setText("Hai selezionato: " + matricolaSelezionata);
                     }
                 }
             });
