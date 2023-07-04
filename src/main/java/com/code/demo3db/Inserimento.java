@@ -5,13 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
 
-import java.io.IOException;
+import javafx.scene.control.*;
 import java.net.URL;
-import java.nio.Buffer;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,9 +15,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.time.LocalDate;
-import java.util.function.Predicate;
-
 import javafx.scene.control.DatePicker;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;

@@ -39,7 +39,7 @@ public class MessageModel {
         else {
             log("chat table DO NOT exists");
             resetTherapyTable();
-        };
+        }
     }
     public static synchronized com.code.demo3db.MessageModel getInstance() throws SQLException
     {

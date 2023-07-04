@@ -41,7 +41,7 @@ public class AlertModel {
         else {
             log("alert table DO NOT exists");
             resetDatiTable();
-        };
+        }
     }
     public static synchronized AlertModel getInstance() throws SQLException
     {
@@ -51,8 +51,6 @@ public class AlertModel {
         return alertModel;
     }
     public ResultSet runQuery(String q) throws SQLException {
-        //PreparedStatement ps = conn.prepareStatement(q);
-        //return ps.executeQuery();
         Statement stmt  = conn.createStatement();
         ResultSet rs = null;
         rs = stmt.executeQuery(q);

@@ -1,27 +1,21 @@
 package com.code.demo3db;
 
 
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Cursor;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,9 +30,9 @@ public class Controller implements Initializable {
     private String nomeutenteinserito;
 
     private final String COLORE_ERRORE = "-fx-text-fill: #972525";
-    private final String COLORE_STATICO = "-fx-background-color: #ebebeb";
-    private final String COLORE_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #a2a2a2; -fx-font-size: 11px;";
-    private final String COLORE_CLIK_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #c4c43d; -fx-font-size: 11px;";
+    //private final String COLORE_STATICO = "-fx-background-color: #ebebeb";
+    //private final String COLORE_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #a2a2a2; -fx-font-size: 11px;";
+    //private final String COLORE_CLIK_DINAMICO = "-fx-background-color: #972525; -fx-text-fill: #c4c43d; -fx-font-size: 11px;";
     @FXML
     private Pane mainPane;
     @FXML
@@ -70,11 +64,6 @@ public class Controller implements Initializable {
 
     public Controller() {
     }
-
-    public String getNomeInserito() {
-        return nomeutenteinserito;
-    }
-
     public void controlloUtente(ActionEvent event) throws SQLException, IOException {
         error_password.setText("");
         select_check.setText("");

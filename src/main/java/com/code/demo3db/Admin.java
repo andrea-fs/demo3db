@@ -1,39 +1,23 @@
 package com.code.demo3db;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
-import javafx.application.Application;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.sql.SQLException;
-
-import static javafx.application.Application.launch;
-import java.sql.Connection;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
 
 public class Admin implements Initializable {
 
@@ -61,7 +45,7 @@ public class Admin implements Initializable {
     @FXML
     private ChoiceBox<String> MedicoPaziente;
 
-    private String tablename = "archivio";
+    private final String tablename = "archivio";
     // TODO IMPORTANTE CONTROLLA INSERIMENTO MINIMO PASSEORD ECC. !!!!!!!!!!
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -127,9 +111,9 @@ public class Admin implements Initializable {
     public void indietro(ActionEvent eventIndietro) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Password.fxml"));
 
-        stage = (Stage) ((Node) eventIndietro.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            stage = (Stage) ((Node) eventIndietro.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
     }
 }

@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -52,7 +51,7 @@ public class Home implements Initializable {
 
     private int daFareT4 = 0;
 
-    private LocalDate dataOggi = LocalDate.now();;
+    private LocalDate dataOggi = LocalDate.now();
 
 
     @Override

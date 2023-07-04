@@ -42,7 +42,7 @@ public class DataModel {
         else {
             log("fattori table DO NOT exists");
             resetDatiTable();
-        };
+        }
     }
     public static synchronized DataModel getInstance() throws SQLException
     {
@@ -95,11 +95,9 @@ public class DataModel {
         return "DATE";
     }
     public void insertData(String matricola, LocalDate date, int time, int SBP, int DBP, String farmaco, int dose, String sintomi) throws SQLException {
-        // Prepara l'istruzione di inserimento
         String insertQuery = "INSERT INTO dati (matricola, data, ora, SBP, DBP, farmaco, dose, sintomi) " +
                 "VALUES ('" + matricola + "', '" + date + "', '" + time + "', " + SBP + ", " + DBP + ", '" + farmaco + "', '" + dose + "', '" + sintomi + "')";
 
-        // Esegui l'istruzione di inserimento
         runStatement(insertQuery);
     }
 /*

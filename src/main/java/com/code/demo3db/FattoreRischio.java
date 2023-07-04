@@ -22,6 +22,7 @@ public class FattoreRischio {
         this.medico = medico;
         this.data = data;
     }
+    public FattoreRischio(){}
 
     public String getMatricolaPaziente() {
         return matricolaPaziente;

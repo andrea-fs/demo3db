@@ -42,7 +42,7 @@ public class DatiPazienteModel {
         else {
             log("fattori table DO NOT exists");
             resetDatiTable();
-        };
+        }
     }
     public static synchronized DatiPazienteModel getInstance() throws SQLException
     {

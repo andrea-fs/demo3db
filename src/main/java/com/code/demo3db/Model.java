@@ -1,15 +1,10 @@
 package com.code.demo3db;
-import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import com.code.demo3db.ArchivioRow;
 
 // TODO controlli tuple inserimento ecc
 
@@ -91,7 +86,7 @@ public class Model {
         else {
             log("archivio table DO NOT exists");
             resetArchivioTable();
-        };
+        }
     }
 
     public void insert_raw(String tablename, String matricola, String password, String nome, String cognome, String type, String medico_associato){
@@ -131,8 +126,6 @@ public class Model {
     }
 
     public ResultSet runQuery(String q) throws SQLException {
-        //PreparedStatement ps = conn.prepareStatement(q);
-        //return ps.executeQuery();
         Statement stmt  = conn.createStatement();
         ResultSet rs = null;
         rs = stmt.executeQuery(q);

@@ -11,8 +11,8 @@
       <TableView fx:id="tabella" layoutX="254.0" layoutY="35.0" prefHeight="479.0" prefWidth="335.0">
         <columns>
           <TableColumn fx:id="colonnaMatricola" prefWidth="75.0" text="C1" />
-            <TableColumn fx:id="colonnaCognome" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="colonnaNome" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="colonnaCognome" prefWidth="75.0" text="Cognome" />
+            <TableColumn fx:id="colonnaNome" prefWidth="75.0" text="Nome" />
         </columns>
       </TableView>
       <Label layoutX="9.0" layoutY="94.0" text="Seleziona il paziente" textFill="#151515">
@@ -34,8 +34,8 @@
       <Label fx:id="scegliPazienteAdatto" layoutX="40.0" layoutY="48.0" text="Seleziona una un paziente adatto" textFill="#891d1d" />
       <TableView fx:id="alertTable" layoutX="10.0" layoutY="263.0" prefHeight="200.0" prefWidth="231.0">
         <columns>
-          <TableColumn fx:id="colonnaMatricolaAlert" prefWidth="113.59997749328613" text="C1" />
-          <TableColumn fx:id="colonnaCategoria" prefWidth="116.79998016357422" text="C2" />
+          <TableColumn fx:id="colonnaMatricolaAlert" prefWidth="113.59997749328613" text="paziente" />
+          <TableColumn fx:id="colonnaCategoria" prefWidth="116.79998016357422" text="Alert" />
         </columns>
       </TableView>
    </children>

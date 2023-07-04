@@ -6,12 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +17,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -106,6 +103,7 @@ public class FattoriDiRischio implements Initializable {
             fattoriRischioList = model.getFattoriRischioByMatricola(matricola_P);
             tabella.getItems().addAll(fattoriRischioList);
         }
+        assert fattoriRischioList != null;
         if (!fattoriRischioList.isEmpty()) {
             int lastIndex = fattoriRischioList.size() - 1;
             FattoreRischio ultimoFattoreRischio = fattoriRischioList.get(lastIndex);

@@ -24,6 +24,7 @@ public class Alert {
         this.matricola.set(matricola);
     }
 
+    // non usato
     public String getCategoria() {
         return categoria.get();
     }
@@ -31,7 +32,7 @@ public class Alert {
     public StringProperty categoriaProperty() {
         return categoria;
     }
-
+    //non usato
     public void setCategoria(String categoria) {
         this.categoria.set(categoria);
     }

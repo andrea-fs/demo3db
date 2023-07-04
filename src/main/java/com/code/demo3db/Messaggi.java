@@ -7,8 +7,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;

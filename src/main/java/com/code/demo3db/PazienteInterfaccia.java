@@ -1,6 +1,5 @@
 package com.code.demo3db;
 
-import javafx.beans.binding.DoubleBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -60,26 +58,8 @@ public class PazienteInterfaccia implements Initializable{
     @FXML
     private Button buttonMedico;
 
-
-
-
-    /*public void switchToInserimento(ActionEvent event) throws IOException {
-
-        //Parent root = FXMLLoader.load(getClass().getResource("MedicoInterfaccia.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InserimentoPaziente.fxml"));
-        Parent root = loader.load();
-        InserimentoPaziente inserimentoPaziente = loader.getController();
-
-        inserimentoPaziente.initializeData(nomeUtenteLabel.getText(), nome.getText(), cognome.getText());
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //mainPane.setMinSize(500, 200);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Benvenuto.fxml"));
@@ -106,8 +86,6 @@ public class PazienteInterfaccia implements Initializable{
 
     }
     public void initializeData(String nomeUtente) {
-
-
 
         // TODO
         this.nomeUtente = nomeUtente;

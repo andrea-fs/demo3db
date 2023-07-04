@@ -5,26 +5,21 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.Group;
-import javafx.scene.Node;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
+
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-import static javafx.application.Application.launch;
 public class Main extends Application{   //TODO mettere vincoli su lunghezze x effetto grafico
     @Override
-    public void start(Stage stage) throws IOException, SQLException {
+    public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Password.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root, 800, 500);

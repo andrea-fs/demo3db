@@ -1,6 +1,5 @@
 package com.code.demo3db;
 
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -8,7 +7,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 

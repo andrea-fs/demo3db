@@ -25,47 +25,29 @@ public class ArchivioRow {
         return matricola.get();
     }
 
-    public SimpleStringProperty matricolaProperty() {
-        return matricola;
-    }
+
 
     public String getPassword() {
         return password.get();
     }
 
-    public SimpleStringProperty passwordProperty() {
-        return password;
-    }
 
     public String getNome() {
         return nome.get();
     }
 
-    public SimpleStringProperty nomeProperty() {
-        return nome;
-    }
 
     public String getCognome() {
         return cognome.get();
     }
 
-    public SimpleStringProperty cognomeProperty() {
-        return cognome;
-    }
-
+    // non usato
     public String getMedicoPaziente() {
         return medicoPaziente.get();
     }
 
-    public SimpleStringProperty medicoPazienteProperty() {
-        return medicoPaziente;
-    }
 
     public String getMedicoAssociato() {
         return medicoAssociato.get();
-    }
-
-    public SimpleStringProperty medicoAssociatoProperty() {
-        return medicoAssociato;
     }
 }

@@ -1,6 +1,5 @@
 package com.code.demo3db;
 
-import com.code.demo3db.Paziente;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +10,6 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ScegliPaziente implements Initializable {
@@ -58,10 +56,10 @@ public class ScegliPaziente implements Initializable {
         }
 
          */
-        colonnaCategoria.setCellFactory(new Callback<TableColumn<Alert, String>, TableCell<Alert, String>>() {
+        colonnaCategoria.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Alert, String> call(TableColumn<Alert, String> column) {
-                return new TableCell<Alert, String>() {
+                return new TableCell<>() {
                     @Override
                     protected void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -86,14 +84,13 @@ public class ScegliPaziente implements Initializable {
             }
 
         });
-        tabella.setRowFactory(tv -> new TableRow<Paziente>() {
+        tabella.setRowFactory(tv -> new TableRow<>() {
             @Override
             protected void updateItem(Paziente paziente, boolean empty) {
                 super.updateItem(paziente, empty);
                 Model model = null;
                 try {
                     model = Model.getInstance();
-
                 if (paziente != null && !empty) {
                     String medicoAssociato = model.getMedicoAssociato(paziente.getMatricola());
 

@@ -61,9 +61,6 @@ public class Terapia implements Initializable {
         matricola_M = nomeUtente;
         matricola_P = paziente;
 
-        matricola_M = nomeUtente;
-        matricola_P = paziente;
-
     }
     @FXML
     public void popolaTabella(){
