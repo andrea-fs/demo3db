@@ -1,5 +1,6 @@
 package com.code.demo3db;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -23,6 +25,9 @@ public class ScegliPaziente implements Initializable {
     private TableColumn<Alert, String> colonnaMatricolaAlert;
     @FXML
     private TableColumn<Alert, String> colonnaCategoria;
+    @FXML
+    private TableColumn<Alert, LocalDate> colonnaData;
+
     @FXML
     private TableColumn<Paziente, String> colonnaMatricola;
     @FXML
@@ -44,6 +49,8 @@ public class ScegliPaziente implements Initializable {
         colonnaCognome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCognome()));
         colonnaMatricolaAlert.setCellValueFactory(data -> data.getValue().matricolaProperty());
         colonnaCategoria.setCellValueFactory(data -> data.getValue().categoriaProperty());
+        colonnaData.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getData()));
+
         // distingui la grave
         /*
         try {
@@ -111,7 +118,7 @@ public class ScegliPaziente implements Initializable {
 
         caricaPazienti();
 
-        selezionato.setText("clicca nella tabella un paziente");
+        selezionato.setText("seleziona un paziente");
         scegliPazienteAdatto.setText("");
 
 
@@ -138,6 +145,7 @@ public class ScegliPaziente implements Initializable {
                         String matricolaSelezionata = pazienteSelezionato.getMatricola();
                         medicoInterfacciaController.setMatricola_P(matricolaSelezionata);
                         selezionato.setText("Hai selezionato: " + matricolaSelezionata);
+                        selezionato.setStyle("-fx-background-color: #d3ccff;");
                     }
                 }
             });

@@ -47,7 +47,6 @@
          </font>
       </Button>
       <Label fx:id="selezionaCheckBox" layoutX="458.0" layoutY="221.0" text="Label" />
-      <Label layoutX="131.0" layoutY="249.0" text="Terapie attive e storico, selezionare la visualizzazione ➝" />
       <Line endX="455.0999755859375" layoutX="107.0" layoutY="214.0" startX="-86.60001373291016" stroke="#d3ccff" style="-fx-fill: #d3ccff;" />
       <Label layoutX="19.0" layoutY="221.0" text="Carica tabella" textFill="#8e0000" />
     </children>

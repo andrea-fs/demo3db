@@ -44,6 +44,8 @@ public class Inserimento implements Initializable {
 
     @FXML
     private Label oranonvalida;
+    @FXML
+    private Label inserito;
     DataModel model;
     private String matricola;
 
@@ -214,6 +216,7 @@ public class Inserimento implements Initializable {
 
     @FXML
     public void insertData(ActionEvent event) {
+        inserito.setText("");
         datanonvalida.setTextFill(Color.WHITE);
         oranonvalida.setTextFill(Color.WHITE);
         boolean presenzasintomi = true;
@@ -259,7 +262,8 @@ public class Inserimento implements Initializable {
                 try {
                     model.insertData(matricola, parsedDate, ora.getValue(), SBP.getValue(), DBP.getValue(), farmaco.getValue(), dose.getValue(), sintomi.getText());
                     System.out.println("Dati inseriti con successo nel database." + dose.getValue());
-
+                    inserito.setText("inserito");
+                    inserito.setStyle("-fx-background-color:  #689f38;");
                     sintomi.clear();
 
                     Model orgmodel = Model.getInstance();
@@ -284,7 +288,7 @@ public class Inserimento implements Initializable {
 
                     TherapyModel therapy = TherapyModel.getInstance();
 
-                    if (farmaco.getValue() != null) {
+                    if (farmaco.getValue() != "Nessuno") {
                         List<Pair<String, Integer>> terapieList = therapy.getFarmaciTerapieAttive(matricola);
                         boolean isFarmacoPresente = false;
                         boolean isDoseCorretta = false;
@@ -342,7 +346,7 @@ public class Inserimento implements Initializable {
             throw new RuntimeException(e);
         }
 
-
+        inserito.setText("");
         //int orattuale = LocalTime.now().getHour();
         SpinnerValueFactory<Integer> valueSBP
                 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 200, 0);

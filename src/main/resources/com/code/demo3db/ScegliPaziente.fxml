@@ -8,7 +8,7 @@
 
 <Pane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.ScegliPaziente">
    <children>
-      <TableView fx:id="tabella" layoutX="254.0" layoutY="35.0" prefHeight="479.0" prefWidth="335.0">
+      <TableView fx:id="tabella" layoutX="254.0" layoutY="35.0" prefHeight="251.0" prefWidth="319.0">
         <columns>
           <TableColumn fx:id="colonnaMatricola" prefWidth="75.0" text="C1" />
             <TableColumn fx:id="colonnaCognome" prefWidth="75.0" text="Cognome" />
@@ -21,22 +21,24 @@
          </font>
       </Label>
       <Label layoutX="12.0" layoutY="31.0" />
-      <Label fx:id="selezionato" layoutX="48.0" layoutY="169.0" text="clicca nella tabella un paziente ➮">
+      <Label fx:id="selezionato" layoutX="40.0" layoutY="161.0" text="seleziona un paziente ➮">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="254.0" layoutY="10.0" text="I tuoi pazienti">
+      <Label layoutX="254.0" layoutY="10.0" text="Pazienti (evidenziati pazienti associati)">
          <font>
             <Font name="Corbel Light" size="18.0" />
          </font>
       </Label>
       <Label fx:id="scegliPazienteAdatto" layoutX="40.0" layoutY="48.0" text="Seleziona una un paziente adatto" textFill="#891d1d" />
-      <TableView fx:id="alertTable" layoutX="10.0" layoutY="263.0" prefHeight="200.0" prefWidth="231.0">
+      <TableView fx:id="alertTable" layoutX="48.0" layoutY="300.0" prefHeight="200.0" prefWidth="459.0">
         <columns>
-          <TableColumn fx:id="colonnaMatricolaAlert" prefWidth="113.59997749328613" text="paziente" />
-          <TableColumn fx:id="colonnaCategoria" prefWidth="116.79998016357422" text="Alert" />
+          <TableColumn fx:id="colonnaMatricolaAlert" prefWidth="136.00005722045898" text="paziente" />
+          <TableColumn fx:id="colonnaCategoria" prefWidth="183.19996643066406" text="Alert" />
+            <TableColumn fx:id="colonnaData" prefWidth="140.0" text="Data" />
         </columns>
       </TableView>
+      <Label layoutX="48.0" layoutY="278.0" text="Alert" />
    </children>
 </Pane>

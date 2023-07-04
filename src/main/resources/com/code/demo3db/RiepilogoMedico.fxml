@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.RiepilogoMedico">
+<Pane prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.RiepilogoMedico">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3ccff" height="53.0" layoutX="193.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
         <Label layoutX="212.0" layoutY="14.0" text="Riepilogo" textFill="#0c1b1b">
@@ -20,12 +20,16 @@
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-      <TableView fx:id="tabellaTerapie" layoutX="12.0" layoutY="110.0" prefHeight="200.0" prefWidth="564.0">
+      <TableView fx:id="tabellaAcquisizioni" layoutX="12.0" layoutY="110.0" prefHeight="200.0" prefWidth="564.0">
          <columns>
-            <TableColumn fx:id="colDataFine" prefWidth="75.0" text="C1" />
-            <TableColumn fx:id="colFarmaco" prefWidth="75.0" text="C2" />
-            <TableColumn fx:id="colDose" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="colAcquisizioni" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="matricolaColumn" prefWidth="75.0" text="Matricola" />
+            <TableColumn fx:id="sbpColumn" prefWidth="75.0" text="SBP" />
+            <TableColumn fx:id="dbpColumn" prefWidth="75.0" text="DBP" />
+            <TableColumn fx:id="farmacoColumn" prefWidth="75.0" text="Farmaco" />
+            <TableColumn fx:id="doseColumn" prefWidth="75.0" text="Dose" />
+            <TableColumn fx:id="sintomiColumn" prefWidth="75.0" text="Sintomi" />
+            <TableColumn fx:id="dataColumn" prefWidth="75.0" text="Data" />
+            <TableColumn fx:id="oraColumn" prefWidth="75.0" text="Ora" />
          </columns>
       </TableView>
       <CheckBox fx:id="settimana" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Settimana" />

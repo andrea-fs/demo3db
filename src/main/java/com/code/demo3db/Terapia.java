@@ -60,6 +60,8 @@ public class Terapia implements Initializable {
     public void initializeData(String nomeUtente, String paziente) {
         matricola_M = nomeUtente;
         matricola_P = paziente;
+        settimana.setSelected(true);
+        popolaTabella();
 
     }
     @FXML

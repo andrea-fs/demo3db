@@ -52,8 +52,6 @@ public class DataModel {
         return dataModelInstance;
     }
     public ResultSet runQuery(String q) throws SQLException {
-        //PreparedStatement ps = conn.prepareStatement(q);
-        //return ps.executeQuery();
         Statement stmt  = conn.createStatement();
         ResultSet rs = null;
         rs = stmt.executeQuery(q);
@@ -138,6 +136,7 @@ public class DataModel {
             }
         }
     }
+
     public int countAcquisizioni(String farmaco, LocalDate data) throws SQLException {
         String query = "SELECT COUNT(*) FROM dati WHERE farmaco = '" + farmaco + "' AND data = '" + data + "'";
         log(query);
@@ -188,5 +187,28 @@ public class DataModel {
 
         return hasInsertions;
 
+    }
+
+    public ObservableList<AcquisizioniClass> getAcquisizioni(String matricola) throws SQLException {
+        ObservableList<AcquisizioniClass> acquisizioniList = FXCollections.observableArrayList();
+
+        String query = "SELECT * FROM dati WHERE matricola = '" + matricola + "'";
+        ResultSet resultSet = runQuery(query);
+
+        while (resultSet.next()) {
+            AcquisizioniClass acquisizione = new AcquisizioniClass();
+            acquisizione.setMatricola(resultSet.getString("matricola"));
+            acquisizione.setData(resultSet.getDate("data").toLocalDate());
+            acquisizione.setOra(resultSet.getInt("ora"));
+            acquisizione.setSbp(resultSet.getInt("SBP"));
+            acquisizione.setDbp(resultSet.getInt("DBP"));
+            acquisizione.setFarmaco(resultSet.getString("farmaco"));
+            acquisizione.setDose(resultSet.getInt("dose"));
+            acquisizione.setSintomi(resultSet.getString("sintomi"));
+
+            acquisizioniList.add(acquisizione);
+        }
+
+        return acquisizioniList;
     }
 }

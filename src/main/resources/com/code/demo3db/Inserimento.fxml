@@ -81,6 +81,7 @@
       <Label fx:id="datanonvalida" layoutX="240.0" layoutY="408.0" text="Inserisci una data valida" />
       <Label fx:id="oranonvalida" layoutX="240.0" layoutY="460.0" text="Inserisci una ora valida" />
       <ComboBox fx:id="farmaco" layoutX="35.0" layoutY="312.0" prefHeight="25.0" prefWidth="289.0" />
+      <Label fx:id="inserito" layoutX="497.0" layoutY="439.0" text="Inserito" />
     </children>
 
 

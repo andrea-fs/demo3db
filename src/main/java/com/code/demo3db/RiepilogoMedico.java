@@ -22,35 +22,38 @@ public class RiepilogoMedico implements Initializable {
 
     private String matricola_M;
     private String matricola_P;
-
+    @FXML
+    private TableView tabellaAcquisizioni;
     @FXML
     private CheckBox mese;
     @FXML
     private CheckBox settimana;
     @FXML
-    private TableView<TerapiaClass> tabellaTerapie;
-    @FXML
-    private TableColumn<TerapiaClass, LocalDate> colDataFine;
-    @FXML
-    private TableColumn<TerapiaClass, String> colFarmaco;
-    @FXML
-    private TableColumn<TerapiaClass, Integer> colDose;
-    @FXML
-    private TableColumn<TerapiaClass, Integer> colAcquisizioni;
-    @FXML
     private LineChart<String, Integer> grafico;
     @FXML
     private Button caricaRiepilogo;
+    @FXML
+    private TableColumn<AcquisizioniClass, String> matricolaColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, LocalDate> dataColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, Integer> oraColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, Integer> sbpColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, Integer> dbpColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, String> farmacoColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, Integer> doseColumn;
+    @FXML
+    private TableColumn<AcquisizioniClass, String> sintomiColumn;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabellaTerapie.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tabellaAcquisizioni.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        colDataFine.setCellValueFactory(new PropertyValueFactory<>("dataFine"));
-        colFarmaco.setCellValueFactory(new PropertyValueFactory<>("farmaco"));
-        colDose.setCellValueFactory(new PropertyValueFactory<>("dose"));
-        colAcquisizioni.setCellValueFactory(new PropertyValueFactory<>("acquisizioni"));
         mese.setOnAction(this::controlCheck);
         settimana.setOnAction(this::controlCheck);
         settimana.setSelected(true);
@@ -61,14 +64,7 @@ public class RiepilogoMedico implements Initializable {
     public void initializeData(String nomeUtente, String paziente) {
         matricola_M = nomeUtente;
         matricola_P = paziente;
-        try {
-            TherapyModel model = TherapyModel.getInstance();
-            boolean isMeseSelected = mese.isSelected();
-            List<TerapiaClass> terapie = model.getTerapieForTable(matricola_P, isMeseSelected);
-            tabellaTerapie.getItems().addAll(terapie);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        loadAcquisizioni();
     }
     public void controlCheck(ActionEvent e){
         CheckBox selectedCheckBox = (CheckBox) e.getSource();
@@ -105,6 +101,26 @@ public class RiepilogoMedico implements Initializable {
         ObservableList<XYChart.Series<String, Integer>> seriesList = FXCollections.observableArrayList();
         seriesList.addAll(sbpSeries, dbpSeries);
         grafico.setData(seriesList);
+    }
+
+    private void loadAcquisizioni() {
+        try {
+            DataModel dataModel = DataModel.getInstance();
+            ObservableList<AcquisizioniClass> acquisizioniList = dataModel.getAcquisizioni(matricola_P);
+
+            matricolaColumn.setCellValueFactory(new PropertyValueFactory<>("matricola"));
+            dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
+            oraColumn.setCellValueFactory(new PropertyValueFactory<>("ora"));
+            sbpColumn.setCellValueFactory(new PropertyValueFactory<>("sbp"));
+            dbpColumn.setCellValueFactory(new PropertyValueFactory<>("dbp"));
+            farmacoColumn.setCellValueFactory(new PropertyValueFactory<>("farmaco"));
+            doseColumn.setCellValueFactory(new PropertyValueFactory<>("dose"));
+            sintomiColumn.setCellValueFactory(new PropertyValueFactory<>("sintomi"));
+
+            tabellaAcquisizioni.setItems(acquisizioniList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeStage(ActionEvent event) {

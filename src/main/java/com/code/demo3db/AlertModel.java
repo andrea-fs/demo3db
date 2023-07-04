@@ -105,8 +105,9 @@ public class AlertModel {
 
         while (resultSet.next()) {
             String matricola = resultSet.getString("paziente");
+            LocalDate data = resultSet.getDate("data").toLocalDate();
             String categoria = resultSet.getString("categoria");
-            Alert alert = new Alert(matricola, categoria);
+            Alert alert = new Alert(matricola, categoria, data);
             alerts.add(alert);
         }
 
