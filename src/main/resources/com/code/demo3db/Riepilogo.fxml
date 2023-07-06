@@ -8,14 +8,14 @@
    <children>
       <TableView fx:id="tabellaAcquisizioni" layoutX="20.0" layoutY="78.0" prefHeight="353.0" prefWidth="549.0">
         <columns>
-          <TableColumn fx:id="matricolaColumn" prefWidth="75.0" text="C1" />
-          <TableColumn fx:id="farmacoColumn" prefWidth="75.0" text="C2" />
-            <TableColumn fx:id="doseColumn" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="sbpColumn" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="dbpColumn" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="sintomiColumn" prefWidth="42.4000244140625" text="Column X" />
-            <TableColumn fx:id="dataColumn" prefWidth="34.39996337890625" text="Column X" />
-            <TableColumn fx:id="oraColumn" prefWidth="75.0" text="Column X" />
+          <TableColumn fx:id="matricolaColumn" prefWidth="75.0" text="Matricola" />
+          <TableColumn fx:id="farmacoColumn" prefWidth="75.0" text="Farmaco" />
+            <TableColumn fx:id="doseColumn" prefWidth="75.0" text="Dose" />
+            <TableColumn fx:id="sbpColumn" prefWidth="75.0" text="SBP" />
+            <TableColumn fx:id="dbpColumn" prefWidth="75.0" text="DBP" />
+            <TableColumn fx:id="sintomiColumn" prefWidth="42.4000244140625" text="Sintomi" />
+            <TableColumn fx:id="dataColumn" prefWidth="34.39996337890625" text="Data" />
+            <TableColumn fx:id="oraColumn" prefWidth="75.0" text="Ora" />
         </columns>
       </TableView>
    </children>
