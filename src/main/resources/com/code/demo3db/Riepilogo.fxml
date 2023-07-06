@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
 
-<?import com.sun.javafx.charts.Legend?>
-<?import javafx.scene.text.Font?>
-<Pane xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.code.demo3db.Riepilogo">
-    <children>
-        <Label layoutX="229.0" layoutY="218.0" text="Riepilogo" textFill="azure">
-            <font>
-                <Font name="System Bold" size="36.0" />
-            </font>
-        </Label>
-    </children>
+<Pane prefHeight="509.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Riepilogo">
+   <children>
+      <TableView fx:id="tabellaAcquisizioni" layoutX="20.0" layoutY="78.0" prefHeight="353.0" prefWidth="549.0">
+        <columns>
+          <TableColumn fx:id="matricolaColumn" prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="farmacoColumn" prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="doseColumn" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="sbpColumn" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="dbpColumn" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="sintomiColumn" prefWidth="42.4000244140625" text="Column X" />
+            <TableColumn fx:id="dataColumn" prefWidth="34.39996337890625" text="Column X" />
+            <TableColumn fx:id="oraColumn" prefWidth="75.0" text="Column X" />
+        </columns>
+      </TableView>
+   </children>
 
 </Pane>

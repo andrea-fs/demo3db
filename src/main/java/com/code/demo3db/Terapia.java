@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Terapia implements Initializable {
+
     @FXML
     private DatePicker data;
     @FXML

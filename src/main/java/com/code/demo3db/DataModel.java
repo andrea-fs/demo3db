@@ -167,12 +167,14 @@ public class DataModel {
 
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            LocalDate date = rs.getDate("data").toLocalDate();
-            int sbp = rs.getInt("SBP");
-            int dbp = rs.getInt("DBP");
+            if (rs.getInt("SBP") != 0 || rs.getInt("DBP") != 0) {
+                LocalDate date = rs.getDate("data").toLocalDate();
+                int sbp = rs.getInt("SBP");
+                int dbp = rs.getInt("DBP");
 
-            Measurement measurement = new Measurement(date, sbp, dbp);
-            measurements.add(measurement);
+                Measurement measurement = new Measurement(date, sbp, dbp);
+                measurements.add(measurement);
+            }
         }
 
         return measurements;

@@ -10,8 +10,8 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#insertMessaggio" prefHeight="514.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.code.demo3db.Messaggi">
    <children>
       <TextArea fx:id="newMessage" layoutX="11.0" layoutY="430.0" prefHeight="33.0" prefWidth="566.0" />
-      <Label layoutX="482.0" layoutY="413.0" text="nuovomessaggio" />
-      <TableView fx:id="tabella" layoutX="24.0" layoutY="202.0" prefHeight="200.0" prefWidth="540.0">
+      <Label layoutX="482.0" layoutY="413.0" text="nuovo messaggio" />
+      <TableView fx:id="tabella" layoutX="24.0" layoutY="32.0" prefHeight="370.0" prefWidth="540.0">
         <columns>
           <TableColumn fx:id="testoColonna" prefWidth="441.5999813079834" text="Chat" />
           <TableColumn fx:id="dataColonna" minWidth="0.0" prefWidth="132.79995727539062" text="Data" />

@@ -41,5 +41,6 @@
       <Button fx:id="insert_button" layoutX="14.0" layoutY="321.0" mnemonicParsing="false" onAction="#insert_tupla" text="Inserimento" />
       <Button fx:id="remove_button" layoutX="138.0" layoutY="322.0" mnemonicParsing="false" onAction="#remove_tupla" text="Rimozione" />
       <Button fx:id="indietro" layoutX="12.0" layoutY="367.0" mnemonicParsing="false" onAction="#indietro" text="Torna alla schermata di login" textFill="#8c1a1a" />
+      <Label fx:id="errore" layoutX="14.0" layoutY="348.0" text="Errore inserimento" />
    </children>
 </AnchorPane>

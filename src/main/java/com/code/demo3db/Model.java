@@ -234,5 +234,27 @@ public class Model {
             return null;
         }
     }
+    public List<String> getAllMatricole() throws SQLException {
+        List<String> matricole = new ArrayList<>();
+        String query = "SELECT matricola FROM archivio";
+        ResultSet rs = runQuery(query);
+
+        while (rs.next()) {
+            String matricola = rs.getString("matricola");
+            matricole.add(matricola);
+        }
+        return matricole;
+    }
+    public List<String> getMatricoleMedico() throws SQLException {
+        List<String> matricole = new ArrayList<>();
+        String query = "SELECT matricola FROM archivio WHERE type = 'M'";
+        ResultSet rs = runQuery(query);
+
+        while (rs.next()) {
+            String matricola = rs.getString("matricola");
+            matricole.add(matricola);
+        }
+        return matricole;
+    }
 
 }

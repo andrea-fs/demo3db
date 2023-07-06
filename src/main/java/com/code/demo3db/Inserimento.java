@@ -46,6 +46,8 @@ public class Inserimento implements Initializable {
     private Label oranonvalida;
     @FXML
     private Label inserito;
+    @FXML
+    private Label valorip;
     DataModel model;
     private String matricola;
 
@@ -65,6 +67,8 @@ public class Inserimento implements Initializable {
     public void initializeData(String nomeUtente){
         matricola = nomeUtente;
         System.out.println(matricola);
+        valorip.setText("");
+
     }
     private StringConverter<LocalDate> createStringConverter () {
         if (data.getValue() == null){
@@ -217,6 +221,7 @@ public class Inserimento implements Initializable {
     @FXML
     public void insertData(ActionEvent event) {
         inserito.setText("");
+        valorip.setText("");
         datanonvalida.setTextFill(Color.WHITE);
         oranonvalida.setTextFill(Color.WHITE);
         boolean presenzasintomi = true;
@@ -237,6 +242,16 @@ public class Inserimento implements Initializable {
         }
         if (data.getValue().isBefore(LocalDate.of(1950, 1, 1))) {
             datanonvalida.setTextFill(Color.RED);
+            return;
+        }
+        if(SBP.getValue() < DBP.getValue()){
+            valorip.setText("valori pressione non consistenti");
+            valorip.setTextFill(Color.RED);
+            return;
+        }
+        if((SBP.getValue() < 70 || DBP.getValue() < 50) && (SBP.getValue() != 0 && DBP.getValue() != 0)){
+            valorip.setText("valori pressione non consistenti");
+            valorip.setTextFill(Color.RED);
             return;
         }
 
@@ -329,6 +344,7 @@ public class Inserimento implements Initializable {
                 }
             } else {
                 System.out.println("Inserimento non valido");
+                datanonvalida.setTextFill(Color.RED);
             }
         } catch (DateTimeParseException | SQLException e) {
             datanonvalida.setTextFill(Color.RED);

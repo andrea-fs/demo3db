@@ -72,7 +72,7 @@ public class DatiPazienteModel {
                 "Comorbidita VARCHAR(255), " +
                 "Altro VARCHAR(255), " +
                 "Medico VARCHAR(255), " +
-                "data DATE, " +
+                "data TIMESTAMP, " +
                 "PRIMARY KEY (matricola, data, medico, Fattori_di_rischio, Patologie, Comorbidita, Altro)" +
                 ")";
 
@@ -86,7 +86,7 @@ public class DatiPazienteModel {
         System.out.println("Si");
         return rs.next();
     }
-    public void insert_raw(String matricola, String fattori_di_rischio, String patologie, String comorbidita, String altro, String medico, LocalDate data){
+    public void insert_raw(String matricola, String fattori_di_rischio, String patologie, String comorbidita, String altro, String medico, Timestamp data){
 
         try{
             System.out.println("inserimento");
@@ -114,7 +114,7 @@ public class DatiPazienteModel {
                 String comorbidita = rs.getString("Comorbidita");
                 String altro = rs.getString("Altro");
                 String medico = rs.getString("Medico");
-                LocalDateTime data = rs.getTimestamp("data").toLocalDateTime();
+                Timestamp data = rs.getTimestamp("data");
 
                 FattoreRischio fattoreRischio = new FattoreRischio(matricolaPaziente, fattoriRischio, patologie, comorbidita, altro, medico, data);
                 fattoriRischioList.add(fattoreRischio);

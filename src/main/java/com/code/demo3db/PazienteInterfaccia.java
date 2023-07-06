@@ -138,7 +138,10 @@ public class PazienteInterfaccia implements Initializable{
         contentArea.getChildren().setAll(fxml);
     }
     public void riepilpgo(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("Riepilogo.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Riepilogo.fxml"));
+        Parent fxml = loader.load();
+        Riepilogo riepilogo = loader.getController();
+        riepilogo.initializeData(nomeUtente);
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }

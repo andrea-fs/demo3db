@@ -10,13 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
@@ -44,9 +43,10 @@ public class Admin implements Initializable {
     private TextField medicoAssociato;
     @FXML
     private ChoiceBox<String> MedicoPaziente;
+    @FXML
+    private Label errore;
 
     private final String tablename = "archivio";
-    // TODO IMPORTANTE CONTROLLA INSERIMENTO MINIMO PASSEORD ECC. !!!!!!!!!!
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -63,38 +63,70 @@ public class Admin implements Initializable {
 
             MedicoPaziente.getItems().addAll("M", "P");
             MedicoPaziente.setValue("M");
-
             tabella.getColumns();
             Bindings.bindContent(tabella.getItems(), model.getArchivioRows());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        errore.setText("");
     }
 
     public void insert_tupla(ActionEvent event) throws SQLException {
+        Model modelc = Model.getInstance();
+        List<String> matricoleEsistenti = modelc.getAllMatricole();
+        List<String> matricoleMedico = modelc.getMatricoleMedico();
+        boolean control = true;
         String matricolaText = matricola.getText();
         String passwordText = password.getText();
         String nomeText = nome.getText();
         String cognomeText = cognome.getText();
         String medicoPazienteValue = MedicoPaziente.getValue();
+
         String medico_associato = null;
         if(medicoPazienteValue.equals("P")){
             medico_associato = medicoAssociato.getText();
+            if(!medico_associato.matches("[A-Za-z]\\d{4}")){
+                control = false;
+            }
+            if(!matricoleMedico.contains(medicoAssociato.getText())){
+                control = false;
+            }
         }
 
-        ArchivioRow row = new ArchivioRow(matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue, medico_associato);
-        model.insert_raw(tablename,matricolaText,passwordText,nomeText,cognomeText, medicoPazienteValue, medico_associato);
-        //tabella.getItems().add(row);
-
-        matricola.clear();
-        password.clear();
-        nome.clear();
-        cognome.clear();
-        if(!medicoAssociato.equals(null)) {
-            medicoAssociato.clear();
+        if(matricolaText == null || !matricolaText.matches("[A-Za-z]\\d{4}")){
+            control = false;
+        } else if (matricoleEsistenti.contains(matricolaText)) {
+        control = false;
         }
-        MedicoPaziente.setValue("M");
+        if(passwordText == null || passwordText.length() < 4){
+            control = false;
+        }
+        if(nomeText.length() < 1){
+            control = false;
+        }
+        if(cognomeText.length() < 1){
+            control = false;
+        }
 
+        if(control) {
+            ArchivioRow row = new ArchivioRow(matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue, medico_associato);
+            model.insert_raw(tablename, matricolaText, passwordText, nomeText, cognomeText, medicoPazienteValue, medico_associato);
+            //tabella.getItems().add(row);
+
+            matricola.clear();
+            password.clear();
+            nome.clear();
+            cognome.clear();
+            if (!medicoAssociato.equals(null)) {
+                medicoAssociato.clear();
+            }
+            MedicoPaziente.setValue("M");
+            errore.setText("");
+        }
+        else{
+            errore.setText("Errore inserimento");
+            errore.setTextFill(Color.DARKRED);
+        }
     }
 
     public void remove_tupla(ActionEvent event) throws SQLException {

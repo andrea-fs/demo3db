@@ -15,8 +15,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,7 +48,7 @@ public class FattoriDiRischio implements Initializable {
     @FXML
     private TableColumn<FattoreRischio, String> colonnaAltro;
     @FXML
-    private TableColumn<FattoreRischio, LocalDateTime> colonnaData;
+    private TableColumn<FattoreRischio, Timestamp> colonnaData;
     @FXML
     private TableColumn<FattoreRischio, String> colonnaMatricolaMedico;
     @FXML
@@ -88,7 +90,9 @@ public class FattoriDiRischio implements Initializable {
     public void inserRaw(){
         try {
             model = DatiPazienteModel.getInstance();
-            model.insert_raw(matricola_P,fattoriDiRischio.getText(),patologie.getText(),coomorbidita.getText(),altro.getText(),matricola_M, LocalDate.now());
+            Date now = new Date();
+            Timestamp timestamp = new Timestamp(now.getTime());
+            model.insert_raw(matricola_P,fattoriDiRischio.getText(),patologie.getText(),coomorbidita.getText(),altro.getText(),matricola_M, timestamp);
             clearFields();
             caricaFattoriRischio();
         } catch (SQLException e) {

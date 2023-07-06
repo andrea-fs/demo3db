@@ -31,10 +31,10 @@
       <ComboBox fx:id="farmaco" layoutX="12.0" layoutY="69.0" prefHeight="25.0" prefWidth="240.0" />
       <TableView fx:id="tabellaTerapie" layoutX="15.0" layoutY="270.0" prefHeight="200.0" prefWidth="554.0">
         <columns>
-          <TableColumn fx:id="colFarmaco" prefWidth="75.0" text="C1" />
-          <TableColumn fx:id="colDose" prefWidth="75.0" text="C2" />
-            <TableColumn fx:id="colAcquisizioni" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="colDataFine" prefWidth="75.0" text="Column X" />
+          <TableColumn fx:id="colFarmaco" prefWidth="75.0" text="Farmaco" />
+          <TableColumn fx:id="colDose" prefWidth="75.0" text="Dose" />
+            <TableColumn fx:id="colAcquisizioni" prefWidth="75.0" text="n" />
+            <TableColumn fx:id="colDataFine" prefWidth="75.0" text="Data" />
         </columns>
       </TableView>
       <Button fx:id="eliminaTerapia" layoutX="515.0" layoutY="483.0" mnemonicParsing="false" onAction="#eliminaTerapia" style="-fx-background-color: #cc2222;" text="Elimina" />

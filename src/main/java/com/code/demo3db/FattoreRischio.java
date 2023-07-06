@@ -1,5 +1,7 @@
 package com.code.demo3db;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,10 +12,10 @@ public class FattoreRischio {
     private String comorbidita;
     private String altro;
     private String medico;
-    private LocalDateTime data;
+    private Timestamp data;
 
 
-    public FattoreRischio(String matricolaPaziente, String fattoriRischio, String patologie, String comorbidita, String altro, String medico, LocalDateTime data) {
+    public FattoreRischio(String matricolaPaziente, String fattoriRischio, String patologie, String comorbidita, String altro, String medico, Timestamp data) {
         this.matricolaPaziente = matricolaPaziente;
         this.fattoriRischio = fattoriRischio;
         this.patologie = patologie;
@@ -72,11 +74,11 @@ public class FattoreRischio {
         this.medico = medico;
     }
 
-    public LocalDateTime getData() {
+    public Timestamp getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(Timestamp data) {
         this.data = data;
     }
 }
